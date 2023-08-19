@@ -1,0 +1,28 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% block body%}
+<div class="container-fluid">
+    <div class="row">
+       <div class="col-sm-offset-2 col-md-8">
+            <div class="card">
+                <div class="card-header card-header-icon" data-background-color="rose">
+                    <i class="material-icons">dynamic_feed</i>
+                </div>
+                <div class="card-content">
+
+                    <h4 class="card-title">ویرایش :  {{form.vars.value.title}}</h4>
+                    {{form_start(form)}}
+                    <form method="#" action="#">
+                        <div class="form-group label-floating">
+                                                <br>
+                            <label class="control-label">عنوان</label>
+                            {{form_widget(form.title,{"attr":{"class":"form-control"}})}}
+                            <span class="validate-input">{{form_errors(form.title)}}</span>
+                        </div>
+                        <span class="pull-right"><a href="{{path("app_serie_seasons",{"id":season.poster.id})}}" class="btn btn-fill btn-yellow"><i class="material-icons">arrow_forward</i> لغو</a>{{form_widget(form.save,{attr:{"class":"btn btn-fill btn-rose"}})}}</span>
+                    {{form_end(form)}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock%}

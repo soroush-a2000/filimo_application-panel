@@ -1,0 +1,146 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            {#      <div class="col-md-3">
+                    <div class="card">
+                      <div class="tab-moivie">
+                        <a href="#" class="btn btn-tab-movie-active col-md-12"><i class="material-icons">add</i> اضافه کردن </a>
+                        <a href="#" class="btn btn-tab-movie col-md-12"><i class="material-icons">folder</i> منابع </a>
+                        <a href="#" class="btn btn-tab-movie col-md-12"><i class="material-icons">comment</i> نظرات </a>
+                        <a href="#" class="btn btn-tab-movie col-md-12"><i class="material-icons">star_half</i> امتیازات </a>
+                        <a href="#" class="btn btn-tab-movie col-md-12"><i class="material-icons">remove_red_eye</i> 0 مشاهده </a>
+                        <a href="#" class="btn btn-tab-movie col-md-12"><i class="material-icons">share</i> 0 اشتراک گذاری </a>
+                        <a href="{{path("app_channel_index")}}" class="btn btn-tab-movie col-md-12"><i class="material-icons">arrow_forward</i> لغو</a>
+
+                      </div>
+                    </div>
+                  </div>#}
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-header card-header-icon" data-background-color="rose">
+                        <i class="material-icons">live_tv</i>
+                    </div>
+                    <div class="card-content">
+                        <h4 class="card-title">کانال جدید </h4>
+                        {{ form_start(form) }}
+                        <br>
+                        <div class="form-group label-floating is-empty">
+                            <label class="control-label">نام کانال</label>
+                            {{ form_widget(form.title,{"attr":{"class":"form-control"}}) }}
+                            <span class="validate-input">{{ form_errors(form.title) }}</span>
+                        </div>
+                        <div class="fileinput fileinput-new text-center" style="    width: 100%;"
+                             data-provides="fileinput">
+                            <div class="fileinput-new thumbnail">
+                                <a href="#" class="btn btn-rose btn-round btn-select"><i
+                                            class="material-icons">image</i> انتخاب تصویر </a>
+                                <img id="img-preview"
+                                     src="{{ asset("img/image_placeholder.jpg")|imagine_filter('channel_thumb') }}"
+                                     width="100%">
+                            </div>
+                            {{ form_widget(form.file,{"attr":{"class":"file-hidden input-file img-selector","style":"    display: none;"}}) }}
+                            <span class="validate-input">{{ form_errors(form.file) }}</span>
+                        </div>
+                        <div class="form-group label-floating is-empty">
+                            <label class="control-label">توضیحات کانال</label>
+                            {{ form_widget(form.description,{"attr":{"class":"form-control","rows":8}}) }}
+                            <span class="validate-input">{{ form_errors(form.description) }}</span>
+                        </div>
+                        <div class="form-group label-floating is-empty">
+                            <label class="control-label">رده سنی</label>
+                            {{ form_widget(form.classification,{"attr":{"class":"form-control","style":"  direction: ltr;"}}) }}
+                            <span class="validate-input">{{ form_errors(form.classification) }}</span>
+                        </div>
+                        <div class="form-group label-floating is-empty">
+                            <label class="control-label">وب سایت</label>
+                            {{ form_widget(form.website,{"attr":{"class":"form-control","style":"  direction: ltr;"}}) }}
+                            <span class="validate-input">{{ form_errors(form.website) }}</span>
+                        </div>
+                        <div class="form-group label-floating is-empty">
+                            <label class="control-label">پخش کانال : </label>
+                            {{ form_widget(form.playas,{"attr":{"class":"form-control"}}) }}
+                            <span class="validate-input">{{ form_errors(form.playas) }}</span>
+                        </div>
+                        <div class="form-group label-floating is-empty">
+                            <label class="control-label">کشور : </label>
+                            {{ form_widget(form.country,{"attr":{"class":"form-control"}}) }}
+                            <span class="validate-input">{{ form_errors(form.country) }}</span>
+                        </div>
+                        <div class="form-group label-floating " style="display: none">
+                            <label class="control-label">برچسب های کانال (مثال: انیمیشن ، هنری ، ورزشی)</label>
+                            <br>
+                            {{ form_widget(form.tags,{"attr":{"class":"input-tags"}}) }}
+                            <span class="validate-input">{{ form_errors(form.tags) }}</span>
+                        </div>
+                        <br>
+                        <script>
+                            $('.input-tags').selectize({
+                                persist: false,
+                                createOnBlur: true,
+                                create: true
+                            });
+                        </script>
+                        <div class="">
+                            <label>
+                                {{ form_widget(form.enabled) }} فعال باشد؟
+                            </label>
+                        </div>
+                        <div class="">
+                            <label>
+                                {{ form_widget(form.featured) }} ویژه باشد؟ (نمایش در صفحه اصلی)
+                            </label>
+                        </div>
+                        <div class="">
+                            <label>
+                                {{ form_widget(form.comment) }} نظرات فعال باشد؟
+                            </label>
+                        </div>
+                        <br>
+                        {{ form_label(form.categories,"دسته بندی",{label_attr:{"style":"font-size:16px"}}) }} :
+                        <div>
+                            <div class="row">
+                                {% for field in form.categories %}
+                                    <label style="background: #ffd352;border-radius: 20px;padding: 5px;text-align: center;margin: 10px;color: black;font-weight: bold;padding-left: 20px;padding-right: 20px; ">
+                                        <div style="padding:3px;">
+                                            {{ form_widget(field) }} {{ field.vars.label }}
+                                        </div>
+                                    </label>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <div class="panel-body">
+                            <label class="panel-title">منبع کانال</label>
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label">نوع منبع</label>
+                                {{ form_widget(form.sourcetype,{"attr":{"class":"form-control"}}) }}
+                                <span class="validate-input">{{ form_errors(form.sourcetype) }}</span>
+                            </div>
+
+                            <div class="form-group label-floating is-empty" {% if form.sourcetype.vars.value == 5 %} style="display:none" {% endif %}>
+                                <label class="control-label">لینک منبع</label>
+                                {{ form_widget(form.sourceurl,{"attr":{"class":"form-control"}}) }}
+                                <span class="validate-input">{{ form_errors(form.sourceurl) }}</span>
+                            </div>
+
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label">کیفیت و توضیحات منبع</label>
+                                {{ form_widget(form.sourcequality,{"attr":{"class":"form-control"}}) }}
+                                <span class="validate-input">{{ form_errors(form.sourcetype) }}</span>
+                            </div>
+                        </div>
+                        <br>
+                        <span class="pull-right"><a href="{{ path("app_channel_index") }}"
+                                                    class="btn btn-fill btn-yellow"><i class="material-icons">arrow_forward</i> لغو</a>{{ form_widget(form.save,{attr:{"class":"btn btn-fill btn-rose"}}) }}</span>
+                        <h6 class="card-title" style="color: red">توجه : پس از اضافه کردن کانال با کلیک بر روی گزینه <i
+                                    class="material-icons btn btn-primary btn-xs btn-round"
+                                    style="color: white;cursor: none">edit</i>&nbsp; کانال اضافه شده میتوانید جزئیات
+                            بیشتری به آن اضافه نمایید. </h6>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

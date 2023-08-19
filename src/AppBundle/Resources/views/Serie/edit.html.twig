@@ -1,0 +1,143 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% block body%}
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card card-stats" style="margin: 15px 0;">
+					<div class="card-content views-body  pull-right">
+						<a href="#" class="btn btn-tab-movie"><i class="material-icons">remove_red_eye</i> {{serie.viewscountnumber}} مشاهده </a>
+						<a href="#" class="btn btn-tab-movie pull-right"><i class="material-icons">share</i> {{serie.sharesnumber}} اشتراک گذاری </a>
+						<a href="#" class="btn btn-tab-movie pull-right"><i class="material-icons">cloud_download</i> {{serie.downloadscountnumber}} دانلود </a>
+					</div>
+					<div class="card-header " data-background-color="green">
+						<i class="material-icons">tv</i>
+					</div>
+					<div class="card-content trailer-body">
+						<h4 class="title"> ویرایش :  {{serie.title }} </b></h4>
+						<div class="tab-moivie">
+							<a href="{{path("app_serie_edit",{"id":serie.id})}}" class="btn btn-tab-movie-active"><i class="material-icons">edit</i> ویرایش </a>
+							<a href="{{path("app_serie_cast",{"id":serie.id})}}" class="btn btn-tab-movie"><i class="material-icons">recent_actors</i> عوامل سازنده </a>
+							<a href="{{path("app_serie_trailer",{"id":serie.id})}}" class="btn btn-tab-movie"><i class="material-icons">movie_filter</i> پیشنمایش </a>
+							<a href="{{path("app_serie_seasons",{"id":serie.id})}}" class="btn btn-tab-movie"><i class="material-icons">dynamic_feed</i> فصل ها </a>
+							<a href="{{path("app_serie_comments",{"id":serie.id})}}" class="btn btn-tab-movie"><i class="material-icons">comment</i> نظرات </a>
+							<a href="{{path("app_serie_ratings",{"id":serie.id})}}" class="btn btn-tab-movie"><i class="material-icons">star_half</i> امتیازات </a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="card">
+					<div class="card-header card-header-icon" data-background-color="rose">
+						<i class="material-icons">edit</i>
+					</div>
+					<div class="card-content">
+						<h4 class="card-title">ویرایش : {{form.vars.value.title}}</h4>
+						<br>
+						{{form_start(form)}}
+						<div class="col-md-4">
+							<div class="fileinput fileinput-new text-center" style="width:100%"  data-provides="fileinput">
+								<div class="fileinput-new thumbnail" style="width:100%" >
+									<a href="#" class="btn btn-rose btn-round btn-select"><i class="material-icons">image</i> انتخاب تصویر </a>
+									<img  id="img-preview" src="{{asset(form.vars.value.poster.link)|imagine_filter('poster_thumb')}}"  width="100%">
+								</div>
+								{{form_widget(form.fileposter,{"attr":{"class":"file-hidden input-file img-selector","style":"    display: none;"}})}}
+								<span class="validate-input">{{form_errors(form.fileposter)}}</span>
+							</div>
+						</div>
+						<div class="col-md-8">
+							<div class="fileinput fileinput-new text-center"  data-provides="fileinput">
+								<div class="fileinput-new thumbnail" >
+									<a href="#" class="btn btn-rose btn-round btn-select-1"><i class="material-icons">image</i> انتخاب تصویر </a>
+									{% if form.vars.value.cover != null %}
+										<img  id="img-preview-1" src="{{asset(form.vars.value.cover.link)|imagine_filter('cover_thumb')}}"  width="100%">
+									{% else %}
+										<img  id="img-preview-1" src="{{asset("img/image_placeholder.jpg")|imagine_filter('cover_thumb')}}"  width="100%">
+									{% endif %}
+								</div>
+								{{form_widget(form.filecover,{"attr":{"class":"file-hidden input-file-1 img-selector-1","style":"    display: none;"}})}}
+								<span class="validate-input">{{form_errors(form.filecover)}}</span>
+							</div>
+							<div class="form-group label-floating is-empty">
+								<label class="control-label">نام سریال</label>
+								{{form_widget(form.title,{"attr":{"class":"form-control"}})}}
+								<span class="validate-input">{{form_errors(form.title)}}</span>
+							</div>
+							<div class="form-group label-floating is-empty">
+								<label class="control-label">توضیحات سریال</label>
+								{{form_widget(form.description,{"attr":{"class":"form-control","rows":8}})}}
+								<span class="validate-input">{{form_errors(form.description)}}</span>
+							</div>
+							<div class="form-group label-floating is-empty">
+								<label class="control-label">سال تولید سریال</label>
+								{{form_widget(form.year,{"attr":{"class":"form-control"}})}}
+								<span class="validate-input">{{form_errors(form.year)}}</span>
+							</div>
+							<div class="form-group label-floating is-empty">
+								<label class="control-label">رده سنی سریال</label>
+								{{form_widget(form.classification,{"attr":{"class":"form-control","style":"  direction: ltr;"}})}}
+								<span class="validate-input">{{form_errors(form.classification)}}</span>
+							</div>
+							<div class="form-group label-floating is-empty">
+								<label class="control-label">امتیاز سریال در IMdb</label>
+								{{form_widget(form.imdb,{"attr":{"class":"form-control"}})}}
+								<span class="validate-input">{{form_errors(form.imdb)}}</span>
+							</div>
+							<div class="form-group label-floating is-empty">
+								<label class="control-label">تعداد فصل های سریال</label>
+								{{form_widget(form.duration,{"attr":{"class":"form-control"}})}}
+								<span class="validate-input">{{form_errors(form.duration)}}</span>
+							</div>
+							<div class="form-group label-floating is-empty">
+								<label class="control-label">کشور سازنده : </label>
+								{{form_widget(form.country,{"attr":{"class":"form-control"}})}}
+								<span class="validate-input">{{form_errors(form.country)}}</span>
+							</div>
+							<div class="form-group label-floating "  style="display: none">
+								<label class="control-label">تگ های سریال (مثال: انیمیشن ، هنری ، ورزشی)</label>
+								<br>
+								{{form_widget(form.tags,{"attr":{"class":"input-tags"}})}}
+								<span class="validate-input">{{form_errors(form.tags)}}</span>
+							</div>
+							<br>
+							<div class="">
+								<label>
+									{{form_widget(form.enabled)}}  فعال باشد؟
+								</label>
+							</div>
+							<div class="">
+								<label>
+									{{form_widget(form.comment)}}   نظرات فعال باشد؟
+								</label>
+							</div>
+							<br>
+							{{form_label(form.genres,"ژانر",{label_attr:{"style":"font-size:16px"}})}} :
+							<div>
+								<div class="row">
+									{% for field in form.genres %}
+										<label  style="background: #ffd352;border-radius: 20px;padding: 5px;text-align: center;margin: 10px;color: black;font-weight: bold;padding-left: 20px;padding-right: 20px; ">
+											<div  style="padding:3px;">
+												{{ form_widget(field) }} {{ field.vars.label }}
+											</div>
+										</label>
+									{% endfor %}
+								</div>
+							</div>
+							<script>
+								$('.input-tags').selectize({
+								persist: false,
+								createOnBlur: true,
+								create: true
+								});
+							</script>
+						</div>
+						<div class="col-md-12">
+							<hr>
+							<span class="pull-right"><a href="{{path("app_serie_index")}}" class="btn btn-fill btn-yellow"><i class="material-icons">arrow_forward</i> لغو</a>{{form_widget(form.save,{attr:{"class":"btn btn-fill btn-rose"}})}}</span>
+						</div>
+						{{form_end(form)}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock%}

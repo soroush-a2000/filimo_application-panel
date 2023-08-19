@@ -1,0 +1,41 @@
+
+{% extends "AppBundle::layout.html.twig" %}
+{% block body%}
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-sm-offset-1  col-md-4">
+            <a href="{{path("app_support_index")}}" class="btn btn-default btn-lg add-button" title=""><i class="material-icons">arrow_forward</i> برگشت </a>
+        </div>
+        <div class="col-md-5">
+            <a href="mailto:{{support.email}}?subject=feedback"  class="btn btn-primary btn-lg add-button pull-right" title=""><i class="material-icons">reply</i> جواب دادن </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-offset-1  col-md-9">
+        
+        <div class="card" >
+            <div class="card-content ch-dark palette-Teal-600 bg">
+                <h2><small>نام : {{support.subject}} <br>
+                        ایمیل : {{support.email}}</small>
+                </h2>
+            </div>
+
+            <div class="card-content ch-dark palette-Teal-600 bg">
+              
+                    <div >پیام</div>
+                    <div style="padding:40px; text-align: justify;">
+                        {{ support.message | raw }}
+                        <br>
+                        <br>
+                        <br>
+                        <ul class="lgi-attrs pull-right"> تاریخ ارسال : {{support.created|ago}} </ul>
+                    </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock%}

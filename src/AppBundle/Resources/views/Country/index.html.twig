@@ -1,0 +1,53 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% block body%}
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+			<div class="row">
+				<div class="col-md-4">
+					<a href="{{path("app_country_index")}}" class="btn  btn-lg btn-warning col-md-12"><i class="material-icons" style="font-size: 30px;">refresh</i> بروزرسانی </a>
+				</div>
+				<div class="col-md-4">
+					<a class="btn btn btn-lg btn-yellow col-md-12"><i class="material-icons" style="font-size: 30px;">public</i> {{countries|length}} کشور </a>
+				</div>
+				<div class="col-md-4">
+					<a href="{{path("app_country_add")}}" class="btn btn-rose btn-lg pull-right add-button col-md-12" title=""><i class="material-icons" style="font-size: 30px;">add_box</i> افزودن کشور جدید </a>
+				</div>
+			</div>
+				<div class="row">
+					{% for country in countries %}
+						<div class="col-md-4">
+							<div class="card">
+								<div class="card-content" style="height:200px;width:100% ;text-align: center;   padding: 0px;">
+									<img src="{{asset(country.media.link)|imagine_filter('country_thumb')}}" class="image-element" style="    position: relative !important;">
+								</div>
+								<div class="card-footer" >
+									<span class="pull-left channel-title"><b>{{country.title}}</b></span>
+									<a href="{{path("app_country_edit",{"id":country.id})}}" rel="tooltip" data-placement="left" class=" btn btn-primary btn-xs btn-round pull-right" data-original-title="Edit">
+										<i class="material-icons">edit</i>
+									</a>
+									<a href="{{path("app_country_delete",{"id":country.id})}}" rel="tooltip" data-placement="left" class=" btn btn-danger btn-xs btn-round pull-right" data-original-title="Delete">
+										<i class="material-icons">delete</i>
+									</a>
+								</div>
+							</div>
+						</div>
+					{% else %}
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-content">
+									<br>
+									<br>
+									<center><img src="{{asset("img/bg_empty.png")}}"  style="width: auto !important;"></center>
+									<br>
+									<br>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+				
+			</div>
+		</div>
+		
+	{% endblock%}

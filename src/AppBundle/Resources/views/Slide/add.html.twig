@@ -1,0 +1,72 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% block body%}
+<div class="container-fluid">
+    <div class="row">
+       <div class="col-sm-offset-2 col-md-8">
+            <div class="card">
+                <div class="card-header card-header-icon" data-background-color="rose">
+                    <i class="material-icons">slideshow</i>
+                </div>
+                <div class="card-content">
+                    <h4 class="card-title">افزودن بنر جدید</h4>
+                    {{form_start(form)}}
+                        <br>
+                        <label class="control-label">عنوان بنر</label>
+                        <div class="form-group label-floating">
+                            {{form_widget(form.title,{value: app.request.query.get("title"),"attr":{"class":"form-control"}})}}
+                            <span class="validate-input">{{form_errors(form.title)}}</span>
+                        </div>
+                        <div class="form-group label-floating ">
+                            <label class="control-label">نوع بنر</label>
+                            <br>
+                            {{form_widget(form.type,{"attr":{"class":"form-control"}})}}
+                            <span class="validate-input">{{form_errors(form.type)}}</span>
+                        </div>
+                        <div class="form-group label-floating " style="display:none">
+                            <label class="control-label">فیلم / سریال</label>
+                            {{form_widget(form.poster,{value: app.request.query.get("id"),"attr":{"class":"form-control"}})}}
+                            <span class="validate-input">{{form_errors(form.poster)}}</span>
+                        </div>
+                        <div class="form-group label-floating " style="display:none">
+                            <label class="control-label">کانال</label>
+                            {{form_widget(form.channel,{value: app.request.query.get("id"),"attr":{"class":"form-control"}})}}
+                            <span class="validate-input">{{form_errors(form.channel)}}</span>
+                        </div>
+                        <div class="form-group label-floating " >
+                            <label class="control-label">ژانر</label>
+                            {{form_widget(form.genre,{value: app.request.query.get("id"),"attr":{"class":"form-control"}})}}
+                            <span class="validate-input">{{form_errors(form.genre)}}</span>
+                        </div>
+                        <div class="form-group label-floating " style="display:none">
+                            <label class="control-label">دسته بندی</label>
+                            {{form_widget(form.category,{"attr":{"class":"form-control"}})}}
+                            <span class="validate-input">{{form_errors(form.category)}}</span>
+                        </div>
+                        <div class="form-group label-floating " style="display:none">
+                            <label class="control-label">لینک</label>
+                            {{form_widget(form.url,{"attr":{"class":"form-control"}})}}
+                            <span class="validate-input">{{form_errors(form.url)}}</span>
+                        </div>
+                        <script type="text/javascript">
+                        $("#Slide_poster").selectize();
+                        $("#Slide_channel").selectize();
+                        </script>
+                        <div class="fileinput fileinput-new text-center" style="    width: 100%;" data-provides="fileinput">
+                            <div class="fileinput-new thumbnail" style="    width: 100%;">
+                                 <a href="#" class="btn btn-rose btn-round btn-select"><i class="material-icons">image</i> انتخاب تصویر </a>
+                                <img  id="img-preview" src="{{asset("img/image_placeholder.jpg")|imagine_filter('slide_thumb')}}"  width="100%">
+                            </div>
+                           {{form_widget(form.file,{"attr":{"class":"file-hidden input-file img-selector","style":"    display: none;"}})}}
+
+                            <span class="validate-input">{{form_errors(form.file)}}</span>
+                       </div>   
+                        <span class="pull-right"><a href="{{path("app_slide_index")}}" class="btn btn-fill btn-yellow"><i class="material-icons">arrow_forward</i> لغو</a>{{form_widget(form.save,{attr:{"class":"btn btn-fill btn-rose"}})}}</span>
+
+                    {{form_end(form)}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock%}

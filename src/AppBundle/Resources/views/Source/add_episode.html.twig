@@ -1,0 +1,42 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-offset-2 col-md-8">
+                <div class="card">
+                    <div class="card-header card-header-icon" data-background-color="rose">
+                        <i class="material-icons">folder</i>
+                    </div>
+                    <div class="card-content">
+                        <h4 class="card-title"> اضافه کردن منبع جدید به: {{ episode.title }} </h4>
+                        {{ form_start(form) }}
+                        <br>
+                        <div class="form-group label-floating is-empty">
+                            <label class="control-label">نوع منبع</label>
+                            {{ form_widget(form.type,{"attr":{"class":"form-control"}}) }}
+                            <span class="validate-input">{{ form_errors(form.type) }}</span>
+                        </div>
+                        <div class="form-group label-floating is-empty" {% if form.type.vars.value == 5 %} style="display:none" {% endif %}>
+                            <label class="control-label">لینک منبع</label>
+                            {{ form_widget(form.url,{"attr":{"class":"form-control"}}) }}
+                            <span class="validate-input">{{ form_errors(form.url) }}</span>
+                        </div>
+                        <div class="form-group label-floating is-empty" {% if form.type.vars.value != 5 %} style="display:none" {% endif %}>
+                            <label class="control-label">فایل منبع</label>
+                            {{ form_widget(form.file,{"attr":{"class":"form-control"}}) }}
+                            <span class="validate-input">{{ form_errors(form.file) }}</span>
+                        </div>
+                        <div class="form-group label-floating is-empty">
+                            <label class="control-label">کیفیت و توضیحات منبع</label>
+                            {{ form_widget(form.quality,{"attr":{"class":"form-control"}}) }}
+                            <span class="validate-input">{{ form_errors(form.quality) }}</span>
+                        </div>
+                        <span class="pull-right"><a href="{{ path(rout,{"id":episode.id}) }}"
+                                                    class="btn btn-fill btn-yellow"><i class="material-icons">arrow_forward</i> لغو</a>{{ form_widget(form.save,{attr:{"class":"btn btn-fill btn-rose"}}) }}</span>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

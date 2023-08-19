@@ -1,0 +1,106 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% block body %}
+    <div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-4">
+                    <a href="{{ path("app_package_index") }}" class="btn  btn-lg btn-warning col-md-12"><i
+                                class="material-icons" style="font-size: 30px;">refresh</i> بروزرسانی </a>
+                </div>
+                <div class="col-md-4">
+                    <a class="btn btn btn-lg btn-yellow col-md-12"><i class="material-icons" style="font-size: 30px;">theaters</i> {{ (packages|length) }}
+                        پکیج </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="{{ path("app_package_add") }}" class="btn btn-rose btn-lg pull-right add-button col-md-12"
+                       title=""><i class="material-icons" style="font-size: 30px;">add_box</i> اضافه کردن پکیج جدید </a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-content">
+                    <h4 class="card-title">لیست پکیج های اشتراک</h4>
+                    <br>
+                    <div class="table-responsive">
+                        <table class="table" width="100%">
+                            <thead class="text-primary">
+                            <tr>
+                                <th width="70px">#</th>
+                                <th>عنوان</th>
+                                <th>مدت زمان</th>
+                                <th>کلید SKU</th>
+                                <th>قیمت اصلی</th>
+                                <th>قیمت با تخفیف</th>
+                                <th>وضعیت</th>
+                                <th width="160px">گزینه ها</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for packages in pagination %}
+                                <tr>
+                                    {% if packages.priceoff != null %}
+                                        <td><img class="avatar-char palette-Red-400 bg"
+                                                 src="{{ asset("img/ic_basket.png") }}" alt=""></td>
+                                    {% else %}
+                                        <td><img class="avatar-char palette-Red-400 bg"
+                                                 src="{{ asset("img/ic_coupon.png") }}" alt=""></td>
+                                    {% endif %}
+
+                                    <td>{{ packages.title }}</td>
+                                    <td>{{ packages.days }} روز</td>
+                                    <td>{{ packages.skukey }}</td>
+                                    <td><span class="label label-primary"
+                                              style="text-transform: inherit;">{{ packages.price }} تومان </span></td>
+                                    {% if packages.priceoff != null %}
+                                        <td><span class="label label-default"
+                                                  style="text-transform: inherit;">{{ packages.priceoff }} تومان </span>
+                                        </td>
+                                    {% else %}
+                                        <td><span class="label label-rose"
+                                                  style="text-transform: inherit;">بدون تخفیف</span></td>
+                                    {% endif %}
+                                    <td>
+                                        {% if packages.enabled==true %}
+                                            <span class="label label-success">فعال</span>
+                                        {% else %}
+                                            <span class="label label-danger">غیر فعال</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <a href="{{ path("app_package_edit",{"id":packages.id}) }}" rel="tooltip"
+                                           data-placement="left" class=" btn btn-primary btn-xs btn-round"
+                                           data-original-title="مشاهده">
+                                            <i class="material-icons">edit</i>
+                                        </a>
+                                        <a href="{{ path("app_package_delete",{"id":packages.id}) }}" rel="tooltip"
+                                           data-placement="left" class=" btn btn-danger btn-xs btn-round"
+                                           data-original-title="حذف">
+                                            <i class="material-icons">delete</i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="4">
+                                        <br>
+                                        <br>
+                                        <center><img src="{{ asset("img/bg_empty.png") }}"
+                                                     style="width: auto !important;"></center>
+                                        <br>
+                                        <br>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class=" pull-right">
+                {{ knp_pagination_render(pagination) }}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

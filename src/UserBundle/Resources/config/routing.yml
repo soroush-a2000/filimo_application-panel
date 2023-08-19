@@ -1,0 +1,69 @@
+api_user_register:
+  path: /api/user/register/{token}/
+  defaults: { _controller: UserBundle:User:api_register}
+  methods: POST
+api_user_edit:
+  path: /api/user/edit/{token}/
+  defaults: { _controller: UserBundle:User:api_edit}
+  methods: POST
+api_user_login:
+  path: /api/user/login/{token}/
+  defaults: { _controller: UserBundle:User:api_login}
+  methods: POST
+user_user_index:
+  path: /users/index.html
+  defaults: { _controller: UserBundle:User:index}
+user_user_edit:
+  path: /users/edit/{id}.html
+  defaults: { _controller: UserBundle:User:edit}
+  requirements:
+      id:  \d+
+user_user_comments:
+  path: /users/comments/{id}.html
+  defaults: { _controller: UserBundle:User:comments}
+  requirements:
+      id:  \d+
+user_user_ratings:
+  path: /users/ratings/{id}.html
+  defaults: { _controller: UserBundle:User:ratings}
+  requirements:
+      id:  \d+
+user_user_delete:
+  path: /users/delete/{id}.html
+  defaults: { _controller: UserBundle:User:delete}
+  requirements:
+      id:  \d+
+api_user_check:
+  path: /api/user/check/{id}/{key}/{token}/
+  defaults: { _controller: UserBundle:User:api_check}
+  methods: GET
+
+api_buy_subscribe:
+    path:     /api/user/buysubscribe/{token}/
+    defaults: { _controller: UserBundle:User:api_buy_subscribe }
+    methods: POST
+
+api_pay_gateway:
+  path:     /api/user/paygateway/{token}/
+  defaults: { _controller: UserBundle:User:api_pay_gateway }
+  methods: POST
+
+api_check_code:
+  path:     /api/user/checkcode/{token}/
+  defaults: { _controller: UserBundle:User:api_check_code }
+  methods: POST
+
+api_send_code:
+      path:     /api/user/sendcode/{token}/
+      defaults: { _controller: UserBundle:User:api_send_code }
+      methods: POST
+
+api_restor_password:
+     path:     /api/user/resetpassword/{token}/
+     defaults: { _controller: UserBundle:User:api_reset_password }
+     methods: POST
+
+api_user_change_password:
+  path: /api/user/password/{id}/{password}/{new_password}/{token}/
+  defaults: { _controller: UserBundle:User:api_change_password}
+  methods: GET

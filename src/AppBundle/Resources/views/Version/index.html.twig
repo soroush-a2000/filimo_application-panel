@@ -1,0 +1,83 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% block body%}
+<div class="container-fluid">
+    <div class="row">
+		<div class="col-md-12">
+			<div class="row">
+				<div class="col-md-4">
+					<a href="{{path("app_version_index")}}" class="btn  btn-lg btn-warning col-md-12"><i class="material-icons" style="font-size: 30px;">refresh</i> بروزرسانی </a>
+				</div>
+				<div class="col-md-4">
+					<a class="btn btn btn-lg btn-yellow col-md-12"><i class="material-icons" style="font-size: 30px;">flag</i> {{versions|length}} نسخه </a>
+				</div>
+				<div class="col-md-4">
+					<a href="{{path("app_version_add")}}" class="btn btn-rose btn-lg pull-right add-button col-md-12" title=""><i class="material-icons" style="font-size: 30px;">add_box</i> افزودن نسخه جدید </a>
+				</div>
+			</div>
+			<div class="card">
+			    <div class="card-content">
+			        <div class="table-responsive">
+			            <table class="table" width="100%">
+			                <thead class="text-primary">
+			                    <th>#</th>
+			                    <th>عنوان نسخه</th>
+			                    <th>کد نسخه</th>
+								<th>پاک کردن داده ها</th>
+			                    <th>وضعیت</th>
+			                    <th width="300px">گزینه ها</th>
+			                </tr></thead>
+			                <tbody>
+			                {% for version in versions %}
+			                    <tr>
+			                        <td>{{version.id}}</td>
+			                        <td>{{version.title}}</td>
+			                        <td><span  > {{version.code}} </span></td>
+									<td>
+										{% if version.cleardata %}
+											<span class="label label-success">فعال</span>
+
+										{% else %}
+											<span class="label label-danger">غیرفعال</span>
+
+										{% endif %}
+									</td>
+			                        <td>
+			                        {% if version.enabled %}
+			                            <span class="label label-success">فعال</span>
+
+			                        {% else %}
+			                            <span class="label label-danger">غیرفعال</span>
+
+			                        {% endif %}
+			                        </td>
+			                        <td>
+		                                <a href="{{path("app_version_edit",{"id":version.id})}}" rel="tooltip" data-placement="left" class=" btn btn-primary btn-xs btn-round" data-original-title="Edit">
+		                                    <i class="material-icons">edit</i>
+		                                </a>
+		                                <a href="{{path("app_version_delete",{"id":version.id})}}" rel="tooltip" data-placement="left" class=" btn btn-danger btn-xs btn-round" data-original-title="Delete">
+		                                    <i class="material-icons">delete</i>
+		                                </a>
+			                        </td>
+			                    </tr>
+			                    {% else %}
+						          <tr>
+							          <td colspan="5">
+								          <br>
+								          <br>
+								          <center><img src="{{asset("img/bg_empty.png")}}"  style="width: auto !important;"></center>
+							              <br>
+							              <br>
+							          </td>
+						          </tr>	
+								{% endfor %}
+			                </tbody>
+			            </table>
+
+			        </div>
+	    		</div>
+
+	    	</div>
+	    </div>
+	</div>
+                            
+{% endblock%}

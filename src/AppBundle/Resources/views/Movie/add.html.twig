@@ -1,0 +1,223 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            {#		<div class="col-md-12">
+                        <div class="card card-stats" style="margin: 15px 0;">
+                            <div class="card-content views-body  pull-right">
+                                <a href="#" class="btn btn-tab-movie"><i class="material-icons">remove_red_eye</i> 0 مشاهده </a>
+                                <a href="#" class="btn btn-tab-movie pull-right"><i class="material-icons">share</i> 0 اشتراک گذاری </a>
+                                <a href="#" class="btn btn-tab-movie pull-right"><i class="material-icons">cloud_download</i> 0 دانلود </a>
+                            </div>
+                            <div class="card-header " data-background-color="green">
+                                <i class="material-icons">movie</i>
+                            </div>
+                            <div class="card-content trailer-body">
+                                <h4 class="title">فیلم جدید </h4>
+                                <div class="tab-moivie">
+                                    <a href="#" class="btn btn-tab-movie-active"><i class="material-icons">edit</i> ویرایش </a>
+                                    <a href="#" class="btn btn-tab-movie"><i class="material-icons">folder</i> منابع </a>
+                                    <a href="#" class="btn btn-tab-movie"><i class="material-icons">recent_actors</i> عوامل سازنده </a>
+                                    <a href="#" class="btn btn-tab-movie"><i class="material-icons">movie_filter</i> پیشنمایش </a>
+                                    <a href="#" class="btn btn-tab-movie"><i class="material-icons">subtitles</i> زیرنویس ها </a>
+                                    <a href="#" class="btn btn-tab-movie"><i class="material-icons">comment</i> نظرات </a>
+                                    <a href="#" class="btn btn-tab-movie"><i class="material-icons">star_half</i> امتیازات </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>#}
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-icon" data-background-color="rose">
+                        <i class="material-icons">movie</i>
+                    </div>
+                    <div class="card-content">
+                        <h4 class="card-title">فیلم جدید </h4>
+                        <br>
+                        {{ form_start(form) }}
+                        <div class="col-md-4">
+                            <div class="fileinput fileinput-new text-center" style="width:100%"
+                                 data-provides="fileinput">
+                                <div class="fileinput-new thumbnail" style="width:100%">
+                                    <a href="#" class="btn btn-rose btn-round btn-select"><i class="material-icons">image</i>
+                                        انتخاب تصویر </a>
+                                    <img id="img-preview"
+                                         src="{{ asset("img/image_placeholder.jpg")|imagine_filter('poster_thumb') }}"
+                                         width="100%">
+                                </div>
+                                {{ form_widget(form.fileposter,{"attr":{"class":"file-hidden input-file img-selector","style":"    display: none;"}}) }}
+                                <span class="validate-input">{{ form_errors(form.fileposter) }}</span>
+                            </div>
+                        </div>
+                        <input type="hidden" name="image_url" id="movie_image">
+
+                        <div class="col-md-8">
+                            <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                                <div class="fileinput-new thumbnail">
+                                    <a href="#" class="btn btn-rose btn-round btn-select-1"><i class="material-icons">image</i>
+                                        انتخاب تصویر </a>
+                                    <img id="img-preview-1"
+                                         src="{{ asset("img/image_placeholder.jpg")|imagine_filter('cover_thumb') }}"
+                                         width="100%">
+                                </div>
+                                {{ form_widget(form.filecover,{"attr":{"class":"file-hidden input-file-1 img-selector-1","style":"    display: none;"}}) }}
+                                <span class="validate-input">{{ form_errors(form.filecover) }}</span>
+                            </div>
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label">نام فیلم</label>
+                                <br>
+                                {{ form_widget(form.title,{"attr":{"class":"form-control search-input"}}) }}
+                                <a href="#" id="search" class="btn btn-sm search-btn"><i class="material-icons"
+                                                                                         style="font-size: 30px;">search</i></a>
+
+                                <span class="validate-input">{{ form_errors(form.title) }}</span>
+                            </div>
+
+                            <div id="div1" style="display:none">
+                                <div id="result_search">
+
+                                </div>
+                                <span class="pull-right" style=" margin: 7px; "><a id="close_search" href="#"
+                                                                                   class="btn btn-fill btn-yellow"
+                                                                                   style="    margin: 0px;"> لغو</a>
+                            </div>
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label">توضیحات فیلم</label>
+                                {{ form_widget(form.description,{"attr":{"class":"form-control","rows":8}}) }}
+                                <span class="validate-input">{{ form_errors(form.description) }}</span>
+                            </div>
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label">سال تولید فیلم</label>
+                                {{ form_widget(form.year,{"attr":{"class":"form-control"}}) }}
+                                <span class="validate-input">{{ form_errors(form.year) }}</span>
+                            </div>
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label">رده سنی فیلم</label>
+                                {{ form_widget(form.classification,{"attr":{"class":"form-control","style":"  direction: ltr;"}}) }}
+                                <span class="validate-input">{{ form_errors(form.classification) }}</span>
+                            </div>
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label">امتیاز فیلم در IMdb</label>
+                                {{ form_widget(form.imdb,{"attr":{"class":"form-control"}}) }}
+                                <span class="validate-input">{{ form_errors(form.imdb) }}</span>
+                            </div>
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label">مدت زمان فیلم</label>
+                                {{ form_widget(form.duration,{"attr":{"class":"form-control"}}) }}
+                                <span class="validate-input">{{ form_errors(form.duration) }}</span>
+                            </div>
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label">پخش فیلم : </label>
+                                {{ form_widget(form.playas,{"attr":{"class":"form-control"}}) }}
+                                <span class="validate-input">{{ form_errors(form.playas) }}</span>
+                            </div>
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label">دانلود فیلم : </label>
+                                {{ form_widget(form.downloadas,{"attr":{"class":"form-control"}}) }}
+                                <span class="validate-input">{{ form_errors(form.downloadas) }}</span>
+                            </div>
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label">کشور سازنده : </label>
+                                {{ form_widget(form.country,{"attr":{"class":"form-control"}}) }}
+                                <span class="validate-input">{{ form_errors(form.country) }}</span>
+                            </div>
+                            <div class="form-group label-floating " style="display: none">
+                                <label class="control-label">تگ های فیلم (مثال: انیمیشن ، هنری ، ورزشی)</label>
+                                <br>
+                                {{ form_widget(form.tags,{"attr":{"class":"input-tags"}}) }}
+                                <span class="validate-input">{{ form_errors(form.tags) }}</span>
+                            </div>
+                            <br>
+                            <div class="">
+                                <label>
+                                    {{ form_widget(form.enabled) }} فعال باشد؟
+                                </label>
+                            </div>
+                            <div class="">
+                                <label>
+                                    {{ form_widget(form.comment) }} نظرات فعال باشد؟
+                                </label>
+                            </div>
+                            <br>
+                            {{ form_label(form.genres,"ژانر",{label_attr:{"style":"font-size:16px"}}) }} :
+                            <div>
+                                <div class="row">
+                                    {% for field in form.genres %}
+                                        <label style="background: #ffd352;border-radius: 20px;padding: 5px;text-align: center;margin: 10px;color: black;font-weight: bold;padding-left: 20px;padding-right: 20px; ">
+                                            <div style="padding:3px;">
+                                                {{ form_widget(field) }} {{ field.vars.label }}
+                                            </div>
+                                        </label>
+
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            <br>
+                            <div class="panel-body">
+                                <label class="panel-title">پیشنمایش فیلم</label>
+                                <div class="form-group label-floating is-empty">
+                                    <label class="control-label">نوع منبع پیشنمایش</label>
+                                    {{ form_widget(form.trailertype,{"attr":{"class":"form-control"}}) }}
+                                    <span class="validate-input">{{ form_errors(form.trailertype) }}</span>
+                                </div>
+                                <div class="form-group label-floating is-empty" {% if form.trailertype.vars.value == 5 %} style="display:none" {% endif %}>
+                                    <label class="control-label">لینک پیشنمایش</label>
+                                    {{ form_widget(form.trailerurl,{"attr":{"class":"form-control"}}) }}
+                                </div>
+                                <span class="validate-input">{{ form_errors(form.trailerurl) }}</span>
+                                <div class="form-group label-floating is-empty" {% if form.trailertype.vars.value != 5 %} style="display:none" {% endif %}>
+                                    <label class="control-label">فایل پیشنمایش</label>
+                                    {{ form_widget(form.trailerfile,{"attr":{"class":"form-control"}}) }}
+                                </div>
+                                <span class="validate-input">{{ form_errors(form.trailerfile) }}</span>
+                            </div>
+                            <div class="panel-body">
+                                <label class="panel-title">منبع فیلم</label>
+                                <div class="form-group label-floating is-empty">
+                                    <label class="control-label">نوع منبع</label>
+                                    {{ form_widget(form.sourcetype,{"attr":{"class":"form-control"}}) }}
+                                    <span class="validate-input">{{ form_errors(form.sourcetype) }}</span>
+                                </div>
+                                <div class="form-group label-floating is-empty" {% if form.sourcetype.vars.value == 5 %} style="display:none" {% endif %}>
+                                    <label class="control-label">لینک منبع</label>
+                                    {{ form_widget(form.sourceurl,{"attr":{"class":"form-control"}}) }}
+                                    <span class="validate-input">{{ form_errors(form.sourceurl) }}</span>
+                                </div>
+                                <div class="form-group label-floating is-empty" {% if form.sourcetype.vars.value != 5 %} style="display:none" {% endif %}>
+                                    <label class="control-label">فایل منبع</label>
+                                    {{ form_widget(form.sourcefile,{"attr":{"class":"form-control"}}) }}
+                                    <span class="validate-input">{{ form_errors(form.sourcefile) }}</span>
+                                </div>
+
+                                <div class="form-group label-floating is-empty">
+                                    <label class="control-label">کیفیت و توضیحات منبع</label>
+                                    {{ form_widget(form.sourcequality,{"attr":{"class":"form-control"}}) }}
+                                    <span class="validate-input">{{ form_errors(form.sourcequality) }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <hr>
+                            <span class="pull-right"><a href="{{ path("app_movie_index") }}"
+                                                        class="btn btn-fill btn-yellow"><i class="material-icons">arrow_forward</i> لغو</a>{{ form_widget(form.save,{attr:{"class":"btn btn-fill btn-rose"}}) }}</span>
+                            <h6 class="card-title" style="color: red">توجه : پس از اضافه کردن فیلم با کلیک بر روی گزینه
+                                <i class="material-icons btn btn-primary btn-xs btn-round"
+                                   style="color: white;cursor: none">edit</i>&nbsp; فیلم اضافه شده میتوانید جزئیات
+                                بیشتری به آن اضافه نمایید. </h6>
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $('.input-tags').selectize({
+            persist: false,
+            createOnBlur: true,
+            create: true
+        });
+    </script>
+{% endblock %}

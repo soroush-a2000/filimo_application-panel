@@ -1,0 +1,89 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% block body%}
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card card-stats" style="margin: 15px 0;">
+					<div class="card-content views-body  pull-right">
+						<a href="#" class="btn btn-tab-movie"><i class="material-icons">remove_red_eye</i> {{serie.viewscountnumber}} مشاهده </a>
+						<a href="#" class="btn btn-tab-movie pull-right"><i class="material-icons">share</i> {{serie.sharesnumber}} اشتراک گذاری </a>
+						<a href="#" class="btn btn-tab-movie pull-right"><i class="material-icons">cloud_download</i> {{serie.downloadscountnumber}} دانلود </a>
+					</div>
+					<div class="card-header " data-background-color="green">
+						<i class="material-icons">tv</i>
+					</div>
+					<div class="card-content trailer-body">
+						<h4 class="title"> ویرایش :  {{serie.title }} </b></h4>
+						<div class="tab-moivie">
+							<a href="{{path("app_serie_edit",{"id":serie.id})}}" class="btn btn-tab-movie"><i class="material-icons">edit</i> ویرایش </a>
+							<a href="{{path("app_serie_cast",{"id":serie.id})}}" class="btn btn-tab-movie-active"><i class="material-icons">recent_actors</i> عوامل سازنده </a>
+							<a href="{{path("app_serie_trailer",{"id":serie.id})}}" class="btn btn-tab-movie"><i class="material-icons">movie_filter</i> پیشنمایش </a>
+							<a href="{{path("app_serie_seasons",{"id":serie.id})}}" class="btn btn-tab-movie"><i class="material-icons">dynamic_feed</i> فصل ها </a>
+							<a href="{{path("app_serie_comments",{"id":serie.id})}}" class="btn btn-tab-movie"><i class="material-icons">comment</i> نظرات </a>
+							<a href="{{path("app_serie_ratings",{"id":serie.id})}}" class="btn btn-tab-movie"><i class="material-icons">star_half</i> امتیازات </a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="card">
+					<div class="card-header card-header-icon" data-background-color="rose">
+						<i class="material-icons">recent_actors</i>
+					</div>
+					<div class="card-content">
+						<h4 class="card-title"> عوامل سازنده : {{serie.title}}  </h4>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-3">
+						<div class="card card-profile">
+							<div class="card-avatar">
+
+									<img class="img" src="{{asset("img/add.png")|imagine_filter('actor_thumb')}}">
+
+							</div>
+							<div class="card-content">
+									{{form_start(role_form)}}
+                                    <div class="form-group label-floating is-empty">
+                                        {{form_widget(role_form.role,{"attr":{"class":"form-control form-control-role","placeholder":"بازیگر یا کارگردان یا ..."}})}}
+                                        <span class="validate-input">{{form_errors(role_form.role)}}</span>
+                                    </div>
+								<br>
+								<div class="form-group label-floating is-empty">
+									{{form_widget(role_form.actor,{"attr":{"class":"form-control form-control-role","placeholder":"انتخاب یک فرد"}})}}
+									<span class="validate-input">{{form_errors(role_form.actor)}}</span>
+								</div>
+								<br>
+								<span>{{form_widget(role_form.save,{attr:{"class":"btn btn-rose btn-xs form-control-role"}})}}</span>
+								{{form_end(role_form)}}
+							</div>
+						</div>
+					</div>
+					<script type="text/javascript">
+					$("#Role_actor").selectize();
+					</script>
+					{% for role in serie.roles %}
+						<div class="col-md-3">
+							<div class="card card-profile">
+								<div class="card-avatar">
+									<a href="#">
+										<img class="img" src="{{asset(role.actor.media.link)|imagine_filter('actor_thumb')}}">
+									</a>
+								</div>
+								<div class="card-content">
+									<h5 class="card-title"><b>{{role.actor.name}}</b></h5>
+									<h6 class="card-sub-title" style="color:gray"><b><h5 class="card-title">{{role.role}}</h5>
+										</b></h6>
+									<a href="{{path("app_role_edit",{"id":role.id})}}" class="btn btn-rose btn-xs"><i class="material-icons">edit</i></a>
+									<a href="{{path("app_role_delete",{"id":role.id})}}" class="btn btn-rose btn-xs"><i class="material-icons">delete</i></a>
+									<a href="{{path("app_role_up",{"id":role.id})}}" class="btn btn-rose btn-xs"><i class="material-icons">keyboard_arrow_up</i></a>
+									<a href="{{path("app_role_down",{"id":role.id})}}" class="btn btn-rose btn-xs"><i class="material-icons">keyboard_arrow_down</i></a>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock%}

@@ -1,0 +1,70 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% block body%}
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="card">
+          <div class="tab-moivie">
+            <a href="{{path("app_channel_edit",{"id":channel.id})}}" class="btn btn-tab-movie col-md-12"><i class="material-icons">edit</i> ویرایش </a>
+            <a href="{{path("app_channel_sources",{"id":channel.id})}}" class="btn btn-tab-movie-active col-md-12"><i class="material-icons">folder</i> منابع </a>
+            <a href="{{path("app_channel_comments",{"id":channel.id})}}" class="btn btn-tab-movie col-md-12"><i class="material-icons">comment</i> نظرات </a>
+            <a href="{{path("app_channel_ratings",{"id":channel.id})}}" class="btn btn-tab-movie col-md-12"><i class="material-icons">star_half</i> امتیازات </a>
+            <a href="#" class="btn btn-tab-movie col-md-12"><i class="material-icons">remove_red_eye</i> {{channel.viewsnumber}} مشاهده </a>
+            <a href="#" class="btn btn-tab-movie col-md-12"><i class="material-icons">share</i> {{channel.sharesnumber}} اشتراک گذاری </a>
+            <a href="{{path("app_channel_index")}}" class="btn btn-tab-movie col-md-12"><i class="material-icons">arrow_forward</i> لغو</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-9">
+              <div class="card">
+                <div class="card-header card-header-icon" data-background-color="rose">
+                  <i class="material-icons">folder</i>
+                </div>
+                <a  href="{{path("app_source_add_channel",{"channel":channel.id})}}" class="btn  btn-xs pull-right new-subtitle-source"><i class="material-icons" style="font-size: 30px;">add_box</i> افزودن منبع جدید </a>
+                <div class="card-content">
+                  <h4 class="card-title"> منابع : {{channel.title}} </h4>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="card" style="margin: 15px 0;">
+                    <div class="table-responsive">
+                      <table class="table table-source" width="100%" >
+                        <thead class="text-primary">
+                          <tr>
+                            <th><b>نوع</b></th>
+                            <th><b>کیفیت و توضیحات</b></th>
+                            <th><b>لینک</b></th>
+                            <th style="text-align:right"><b>گزینه ها</b></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for source in channel.sources %}
+                            <tr>
+                              <td><b>{{source.type|capitalize}}  {% if source.type == "file" and source.media != null %}({{source.media.extension|capitalize}}){% endif %} </b></td>
+                              <td><span class="label label-default" style="text-transform: inherit;">{{source.quality}}</span></td>
+                              <td><span class="label label-info" style="    text-transform: inherit;">{{source.url}} {% if source.type == "file" and source.media != null %} {{ app.request.scheme ~'://' ~ app.request.httpHost ~ asset(source.media.link) }}{% endif %}</span></td>
+                              <td>
+                                <a href="{{path("app_source_edit_channel",{"id":source.id})}}" class="btn btn-rose btn-xs pull-right" ><i class="material-icons">edit</i></a>
+                                <a href="{{path("app_source_delete",{"id":source.id})}}" class="btn btn-rose btn-xs pull-right"><i class="material-icons">delete</i></a>
+                              </td>
+                            </tr>
+                          {% else %}
+                            <tr>
+                              <td colspan="3">
+                                <br>
+                                <center><img src="{{asset("img/bg_empty.png")}}"  style="width: 100% !important;"></center>
+                                <br>
+                              </td>
+                            </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+    </div>
+</div>
+{% endblock%}

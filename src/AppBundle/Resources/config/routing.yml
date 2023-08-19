@@ -1,0 +1,792 @@
+app_home_index:
+    path:     /
+    defaults: { _controller: AppBundle:Home:index }
+app_home_privacypolicy:
+    path:     /privacy_policy.html
+    defaults: { _controller: AppBundle:Home:privacypolicy }
+app_home_settings:
+    path:     /settings.html
+    defaults: { _controller: AppBundle:Home:settings }
+app_home_ads:
+    path:     /ads.html
+    defaults: { _controller: AppBundle:Home:ads }
+app_home_notif_poster:
+    path:     /notif/poster.html
+    defaults: { _controller: AppBundle:Home:notifPoster }
+app_home_notif_channel:
+    path:     /notif/channel.html
+    defaults: { _controller: AppBundle:Home:notifChannel}
+app_home_notif_url:
+    path:     /notif/url.html
+    defaults: { _controller: AppBundle:Home:notifUrl }
+app_home_notif_user_status:
+    path:     /notif/user_status.html
+    defaults: { _controller: AppBundle:Home:notifUserStatus }
+app_home_notif_user_payment:
+    path:     /notif/user_payment.html
+    defaults: { _controller: AppBundle:Home:notifUserPayment }
+app_home_notif_user:
+    path:     /notif/user.html
+    defaults: { _controller: AppBundle:Home:notifUser }
+app_home_notif_category:
+    path:     /notif/category.html
+    defaults: { _controller: AppBundle:Home:notifCategory }
+app_home_notif_genre:
+    path:     /notif/genre.html
+    defaults: { _controller: AppBundle:Home:notifGenre }
+api_home_api_first:
+    path:   /api/first/{token}/
+    defaults: { _controller: AppBundle:Home:api_first }
+api_home_api_search:
+    path:   /api/search/{query}/{token}/
+    defaults: { _controller: AppBundle:Home:api_search }
+api_home_api_device:
+    path:   /api/device/{tkn}/{token}/
+    defaults: { _controller: AppBundle:Home:api_device }
+app_support_index:
+    path:     /support/index.html
+    defaults: { _controller: AppBundle:Support:index }
+app_support_view:
+    path:     /support/view/{id}.html
+    defaults: { _controller: AppBundle:Support:view }
+app_support_delete:
+    path:     /support/delete/{id}.html
+    defaults: { _controller: AppBundle:Support:delete }
+api_support_add:
+    path:     /api/support/add/{token}/
+    defaults: { _controller: AppBundle:Support:api_add }
+    methods: POST
+
+
+
+#slide
+app_slide_add:
+    path: /slide/add.html
+    defaults: { _controller: AppBundle:Slide:add}
+app_slide_index:
+    path: /slide/index.html
+    defaults: { _controller: AppBundle:Slide:index}
+app_slide_edit:
+    path: /slide/{id}.html
+    defaults: { _controller: AppBundle:Slide:edit}
+    requirements:
+        id:  \d+
+app_slide_delete:
+    path: /slide/delete/{id}.html
+    defaults: { _controller: AppBundle:Slide:delete}
+    requirements:
+        id:  \d+
+app_slide_up:
+    path: /slide/up/{id}.html
+    defaults: { _controller: AppBundle:Slide:up}
+    requirements:
+        id:  \d+
+app_slide_down:
+    path: /slide/down/{id}.html
+    defaults: { _controller: AppBundle:Slide:down}
+    requirements:
+        id:  \d+
+api_slide_all:
+    path:     /api/slide/all/{token}/
+    defaults: { _controller: AppBundle:Slide:api_all }
+
+app_category_index:
+    path: /category/index.html
+    defaults: { _controller: AppBundle:Category:index}
+
+app_category_add:
+    path: /category/add.html
+    defaults: { _controller: AppBundle:Category:add}
+
+app_category_edit:
+    path: /category/edit/{id}.html
+    defaults: { _controller: AppBundle:Category:edit}
+    requirements:
+        id:  \d+
+
+app_category_delete:
+    path: /category/delete/{id}.html
+    defaults: { _controller: AppBundle:Category:delete}
+    requirements:
+        id:  \d+
+
+app_category_up:
+    path: /category/up/{id}.html
+    defaults: { _controller: AppBundle:Category:up}
+    requirements:
+        id:  \d+
+
+app_category_down:
+    path: /category/down/{id}.html
+    defaults: { _controller: AppBundle:Category:down}
+    requirements:
+        id:  \d+
+api_category_all:
+    path:     /api/category/all/{token}/
+    defaults: { _controller: AppBundle:Category:api_all }
+api_category_popular:
+    path:     /api/category/popular/{token}/
+    defaults: { _controller: AppBundle:Category:api_popular }
+
+#packages
+app_package_index:
+        path: /package/index.html
+        defaults: { _controller: AppBundle:Package:index}
+
+app_package_add:
+        path: /package/add.html
+        defaults: { _controller: AppBundle:Package:add}
+
+app_package_edit:
+        path: /package/edit/{id}.html
+        defaults: { _controller: AppBundle:Package:edit}
+        requirements:
+            id:  \d+
+
+app_package_delete:
+        path: /package/delete/{id}.html
+        defaults: { _controller: AppBundle:Package:delete}
+        requirements:
+            id:  \d+
+
+api_package_all:
+       path:     /api/package/all/{token}/
+       defaults: { _controller: AppBundle:Package:api_all }
+
+
+
+#countries
+app_country_index:
+    path: /country/index.html
+    defaults: { _controller: AppBundle:Country:index}
+
+app_country_add:
+    path: /country/add.html
+    defaults: { _controller: AppBundle:Country:add}
+
+app_country_edit:
+    path: /country/edit/{id}.html
+    defaults: { _controller: AppBundle:Country:edit}
+    requirements:
+        id:  \d+
+
+app_country_delete:
+    path: /country/delete/{id}.html
+    defaults: { _controller: AppBundle:Country:delete}
+    requirements:
+        id:  \d+
+api_country_all:
+    path:     /api/country/all/{token}/
+    defaults: { _controller: AppBundle:Country:api_all }
+
+#genres
+
+app_genre_index:
+    path: /genre/index.html
+    defaults: { _controller: AppBundle:Genre:index}
+
+app_genre_add:
+    path: /genre/add.html
+    defaults: { _controller: AppBundle:Genre:add}
+
+app_genre_edit:
+    path: /genre/edit/{id}.html
+    defaults: { _controller: AppBundle:Genre:edit}
+    requirements:
+        id:  \d+
+app_genre_delete:
+    path: /genre/delete/{id}.html
+    defaults: { _controller: AppBundle:Genre:delete}
+    requirements:
+        id:  \d+
+app_genre_up:
+    path: /genre/up/{id}.html
+    defaults: { _controller: AppBundle:Genre:up}
+    requirements:
+        id:  \d+
+app_genre_down:
+    path: /genre/down/{id}.html
+    defaults: { _controller: AppBundle:Genre:down}
+    requirements:
+        id:  \d+
+api_genre_all:
+    path:     /api/genre/all/{token}/
+    defaults: { _controller: AppBundle:Genre:api_all }
+#channels
+
+app_channel_index:
+    path: /channel/index.html
+    defaults: { _controller: AppBundle:Channel:index}
+
+app_channel_add:
+    path: /channel/add.html
+    defaults: { _controller: AppBundle:Channel:add}
+
+app_channel_edit:
+    path: /channel/edit/{id}.html
+    defaults: { _controller: AppBundle:Channel:edit}
+    requirements:
+        id:  \d+
+app_channel_sources:
+    path: /channel/sources/{id}.html
+    defaults: { _controller: AppBundle:Channel:sources}
+    requirements:
+        id:  \d+
+app_channel_ratings:
+    path: /channel/ratings/{id}.html
+    defaults: { _controller: AppBundle:Channel:ratings}
+    requirements:
+        id:  \d+
+app_channel_comments:
+    path: /channel/comments/{id}.html
+    defaults: { _controller: AppBundle:Channel:comments}
+    requirements:
+        id:  \d+
+app_channel_delete:
+    path: /channel/delete/{id}.html
+    defaults: { _controller: AppBundle:Channel:delete}
+    requirements:
+        id:  \d+
+app_channel_share:
+    path: /c/share/{id}.html
+    defaults: { _controller: AppBundle:Channel:share}
+    requirements:
+        id:  \d+
+api_channel_random:
+    path:     /api/channel/random/{categories}/{token}/
+    defaults: { _controller: AppBundle:Channel:api_random }
+api_channel_by_filtres:
+    path:     /api/channel/by/filtres/{category}/{country}/{page}/{token}/
+    defaults: { _controller: AppBundle:Channel:api_by_filtres }
+    requirements:
+        category:  \d+
+        country:  \d+
+        page:  \d+
+api_channel_by_id:
+    path:     /api/channel/by/{id}/{token}/
+    defaults: { _controller: AppBundle:Channel:api_by_id }
+    requirements:
+        id:  \d+
+
+#season
+
+app_season_add:
+    path: /season/add/{id}.html
+    defaults: { _controller: AppBundle:Season:add}
+    requirements:
+        id:  \d+
+app_season_edit:
+    path: /season/edit/{id}.html
+    defaults: { _controller: AppBundle:Season:edit}
+    requirements:
+        id:  \d+
+app_season_delete:
+    path: /season/delete/{id}.html
+    defaults: { _controller: AppBundle:Season:delete}
+    requirements:
+        id:  \d+
+app_season_up:
+    path: /season/up/{id}.html
+    defaults: { _controller: AppBundle:Season:up}
+    requirements:
+        id:  \d+
+app_season_down:
+    path: /season/down/{id}.html
+    defaults: { _controller: AppBundle:Season:down}
+    requirements:
+        id:  \d+
+api_season_by_serie:
+    path:     /api/season/by/serie/{id}/{token}/
+    defaults: { _controller: AppBundle:Season:api_by_serie }
+    requirements:
+        id:  \d+
+app_serie_menu:
+    path: /serie/multi.html
+    defaults: { _controller: AppBundle:Serie:menu }
+
+
+#episode
+
+app_episode_add:
+    path: /episode/add/{id}.html
+    defaults: { _controller: AppBundle:Episode:add}
+    requirements:
+        id:  \d+
+app_episode_edit:
+    path: /episode/edit/{id}.html
+    defaults: { _controller: AppBundle:Episode:edit}
+    requirements:
+        id:  \d+
+app_episode_sources:
+    path: /episode/sources/{id}.html
+    defaults: { _controller: AppBundle:Episode:sources}
+    requirements:
+        id:  \d+
+app_episode_subtitles:
+    path: /episode/subtitles/{id}.html
+    defaults: { _controller: AppBundle:Episode:subtitles}
+    requirements:
+        id:  \d+
+app_episode_delete:
+    path: /episode/delete/{id}.html
+    defaults: { _controller: AppBundle:Episode:delete}
+    requirements:
+        id:  \d+
+app_episode_up:
+    path: /episode/up/{id}.html
+    defaults: { _controller: AppBundle:Episode:up}
+    requirements:
+        id:  \d+
+app_episode_down:
+    path: /episode/down/{id}.html
+    defaults: { _controller: AppBundle:Episode:down}
+    requirements:
+        id:  \d+
+api_episode_add_download:
+    path:     /api/episode/add/download/{token}/
+    defaults: { _controller: AppBundle:Episode:api_add_download }
+api_episode_add_view:
+    path:     /api/episode/add/view/{token}/
+    defaults: { _controller: AppBundle:Episode:api_add_view }
+#series
+
+app_serie_index:
+    path: /serie/index.html
+    defaults: { _controller: AppBundle:Serie:index}
+app_serie_add:
+    path: /serie/add.html
+    defaults: { _controller: AppBundle:Serie:add}
+
+app_serie_edit:
+    path: /serie/edit/{id}.html
+    defaults: { _controller: AppBundle:Serie:edit}
+    requirements:
+        id:  \d+
+app_serie_delete:
+    path: /serie/delete/{id}.html
+    defaults: { _controller: AppBundle:Serie:delete}
+    requirements:
+        id:  \d+
+app_serie_cast:
+    path: /serie/cast/{id}.html
+    defaults: { _controller: AppBundle:Serie:cast}
+    requirements:
+        id:  \d+
+app_serie_trailer:
+    path: /serie/trailer/{id}.html
+    defaults: { _controller: AppBundle:Serie:trailer}
+    requirements:
+        id:  \d+
+app_serie_seasons:
+    path: /serie/seasons/{id}.html
+    defaults: { _controller: AppBundle:Serie:seasons}
+    requirements:
+        id:  \d+
+app_serie_comments:
+    path: /serie/comments/{id}.html
+    defaults: { _controller: AppBundle:Serie:comments}
+    requirements:
+        id:  \d+
+app_serie_ratings:
+    path: /serie/ratings/{id}.html
+    defaults: { _controller: AppBundle:Serie:ratings}
+    requirements:
+        id:  \d+
+api_serie_by_filtres:
+    path:     /api/serie/by/filtres/{genre}/{order}/{page}/{token}/
+    defaults: { _controller: AppBundle:Serie:api_by_filtres }
+    requirements:
+        genre:  \d+
+        page:  \d+
+#movies
+
+app_movie_index:
+    path: /movie/index.html
+    defaults: { _controller: AppBundle:Movie:index}
+
+app_movie_add:
+    path: /movie/add.html
+    defaults: { _controller: AppBundle:Movie:add}
+
+app_movie_edit:
+    path: /movie/edit/{id}.html
+    defaults: { _controller: AppBundle:Movie:edit}
+    requirements:
+        id:  \d+
+app_movie_delete:
+    path: /movie/delete/{id}.html
+    defaults: { _controller: AppBundle:Movie:delete}
+    requirements:
+        id:  \d+
+app_movie_sources:
+    path: /movie/sources/{id}.html
+    defaults: { _controller: AppBundle:Movie:sources}
+    requirements:
+        id:  \d+
+app_movie_cast:
+    path: /movie/cast/{id}.html
+    defaults: { _controller: AppBundle:Movie:cast}
+    requirements:
+        id:  \d+
+app_movie_trailer:
+    path: /movie/trailer/{id}.html
+    defaults: { _controller: AppBundle:Movie:trailer}
+    requirements:
+        id:  \d+
+app_movie_subtitles:
+    path: /movie/subtitles/{id}.html
+    defaults: { _controller: AppBundle:Movie:subtitles}
+    requirements:
+        id:  \d+
+app_movie_comments:
+    path: /movie/comments/{id}.html
+    defaults: { _controller: AppBundle:Movie:comments}
+    requirements:
+        id:  \d+
+app_movie_ratings:
+    path: /movie/ratings/{id}.html
+    defaults: { _controller: AppBundle:Movie:ratings}
+    requirements:
+        id:  \d+
+app_movie_share:
+    path: /share/{id}.html
+    defaults: { _controller: AppBundle:Movie:share}
+    requirements:
+        id:  \d+
+api_movie_random:
+    path:     /api/movie/random/{genres}/{token}/
+    defaults: { _controller: AppBundle:Movie:api_random }
+api_movie_by_filtres:
+    path:     /api/movie/by/filtres/{genre}/{order}/{page}/{token}/
+    defaults: { _controller: AppBundle:Movie:api_by_filtres }
+    requirements:
+        genre:  \d+
+        page:  \d+
+api_poster_by_filtres:
+    path:     /api/poster/by/filtres/{genre}/{country}/{order}/{page}/{token}/
+    defaults: { _controller: AppBundle:Movie:api_poster_by_filtres }
+    requirements:
+        genre:  \d+
+        country:  \d+
+        page:  \d+
+api_movie_by_user:
+    path:     /api/movie/by/actor/{id}/{token}/
+    defaults: { _controller: AppBundle:Movie:api_by_actor }
+    requirements:
+        id:  \d+
+api_movie_by_id:
+    path:     /api/movie/by/{id}/{token}/
+    defaults: { _controller: AppBundle:Movie:api_by_id }
+api_movie_add_download:
+    path:     /api/movie/add/download/{token}/
+    defaults: { _controller: AppBundle:Movie:api_add_download }
+api_movie_add_view:
+    path:     /api/movie/add/view/{token}/
+    defaults: { _controller: AppBundle:Movie:api_add_view }
+api_poster_add_share:
+    path:     /api/poster/add/share/{token}/
+    defaults: { _controller: AppBundle:Movie:api_add_share }
+app_movie_menu:
+    path: /movie/multi.html
+    defaults: { _controller: AppBundle:Movie:menu }
+
+#rate api 
+
+api_rate_poster_add:
+    path:     /api/rate/poster/add/{token}/
+    defaults: { _controller: AppBundle:Movie:api_add_rate }
+
+api_rate_channel_add:
+    path:     /api/rate/channel/add/{token}/
+    defaults: { _controller: AppBundle:Channel:api_add_rate }
+
+app_channel_menu:
+    path: /channel/multi.html
+    defaults: { _controller: AppBundle:Channel:menu }
+#actors
+
+app_actor_index:
+    path: /actor/index.html
+    defaults: { _controller: AppBundle:Actor:index}
+
+app_actor_add:
+    path: /actor/add.html
+    defaults: { _controller: AppBundle:Actor:add}
+
+app_actor_edit:
+    path: /actor/edit/{id}.html
+    defaults: { _controller: AppBundle:Actor:edit}
+    requirements:
+        id:  \d+
+
+app_actor_delete:
+    path: /actor/delete/{id}.html
+    defaults: { _controller: AppBundle:Actor:delete}
+    requirements:
+        id:  \d+
+api_actor_all:
+    path: /api/actor/all/{page}/{search}/{token}/
+    defaults: { _controller: AppBundle:Actor:api_all}
+    requirements:
+        page:  \d+
+#sources
+app_subtitle_edit:
+    path: /subtitle/edit/{id}.html
+    defaults: { _controller: AppBundle:Subtitle:edit}
+    requirements:
+        id:  \d+
+app_subtitle_add:
+    path: /subtitle/add/{poster}.html
+    defaults: { _controller: AppBundle:Subtitle:add}
+    requirements:
+        poster:  \d+
+app_subtitle_add_episode:
+    path: /subtitle/add/episode/{episode}.html
+    defaults: { _controller: AppBundle:Subtitle:add_episode}
+    requirements:
+        episode:  \d+
+app_subtitle_delete:
+    path: /subtitle/delete/{id}.html
+    defaults: { _controller: AppBundle:Subtitle:delete}
+    requirements:
+        id:  \d+
+api_subtitle_by_movie:
+    path: /api/subtitles/by/movie/{id}/{token}/
+    defaults: { _controller: AppBundle:Subtitle:api_by_movie}
+    requirements:
+        id:  \d+
+api_subtitle_by_episode:
+    path: /api/subtitles/by/episode/{id}/{token}/
+    defaults: { _controller: AppBundle:Subtitle:api_by_episode}
+    requirements:
+        id:  \d+
+api_subtitle_by_id:
+    path: /api/subtitle/{token}/{id}_subtitle.vtt
+    defaults: { _controller: AppBundle:Subtitle:api_by_id}
+    requirements:
+        id:  \d+
+#sources
+app_source_edit:
+    path: /source/edit/{id}.html
+    defaults: { _controller: AppBundle:Source:edit}
+    requirements:
+        id:  \d+
+app_source_edit_episode:
+    path: /source/edit/episode/{id}.html
+    defaults: { _controller: AppBundle:Source:edit_episode}
+    requirements:
+        id:  \d+
+app_source_edit_channel:
+    path: /source/edit/channel/{id}.html
+    defaults: { _controller: AppBundle:Source:edit_channel}
+    requirements:
+        id:  \d+
+app_source_add:
+    path: /source/add/{poster}.html
+    defaults: { _controller: AppBundle:Source:add}
+    requirements:
+        poster:  \d+
+app_source_add_episode:
+    path: /source/add/episode/{episode}.html
+    defaults: { _controller: AppBundle:Source:add_episode}
+    requirements:
+        episode:  \d+
+app_source_add_channel:
+    path: /source/add/channel/{channel}.html
+    defaults: { _controller: AppBundle:Source:add_channel}
+    requirements:
+        channel:  \d+
+app_source_delete:
+    path: /source/delete/{id}.html
+    defaults: { _controller: AppBundle:Source:delete}
+    requirements:
+        id:  \d+
+api_channel_add_share:
+    path:     /api/channel/add/share/{token}/
+    defaults: { _controller: AppBundle:Channel:api_add_share }
+api_channel_add_view:
+    path:     /api/channel/add/view/{token}/
+    defaults: { _controller: AppBundle:Channel:api_add_view }
+
+#roles
+app_role_edit:
+    path: /role/edit/{id}.html
+    defaults: { _controller: AppBundle:Role:edit}
+    requirements:
+        id:  \d+
+app_role_up:
+    path: /role/up/{id}.html
+    defaults: { _controller: AppBundle:Role:up}
+    requirements:
+        id:  \d+
+app_role_down:
+    path: /role/down/{id}.html
+    defaults: { _controller: AppBundle:Role:down}
+    requirements:
+        id:  \d+
+app_role_delete:
+    path: /role/delete/{id}.html
+    defaults: { _controller: AppBundle:Role:delete}
+    requirements:
+        id:  \d+
+app_role_by_poster:
+    path: /api/role/by/poster/{id}/{token}/
+    defaults: { _controller: AppBundle:Role:api_by_poster}
+    requirements:
+        id:  \d+
+#version
+app_version_add:
+    path: /version/add.html
+    defaults: { _controller: AppBundle:Version:add}
+app_version_index:
+    path: /version/index.html
+    defaults: { _controller: AppBundle:Version:index}
+app_version_edit:
+    path: /version/edit/{id}.html
+    defaults: { _controller: AppBundle:Version:edit}
+    requirements:
+        id:  \d+
+app_version_delete:
+    path: /version/delete/{id}.html
+    defaults: { _controller: AppBundle:Version:delete}
+    requirements:
+        id:  \d+
+api_version_check:
+    path: /api/version/check/{code}/{user}/{token}/
+    defaults: { _controller: AppBundle:Version:api_check}
+    requirements:
+        code:  \d+
+        user:  \d+
+
+
+#not yet
+
+
+
+
+
+
+#reactions 
+
+api_video_add_like:
+    path:     /api/video/add/like/{token}/
+    defaults: { _controller: AppBundle:Status:api_add_like }
+    
+api_video_add_love:
+    path:     /api/video/add/love/{token}/
+    defaults: { _controller: AppBundle:Status:api_add_love }
+
+api_video_add_angry:
+    path:     /api/video/add/angry/{token}/
+    defaults: { _controller: AppBundle:Status:api_add_angry }
+
+api_video_add_sad:
+    path:     /api/video/add/sad/{token}/
+    defaults: { _controller: AppBundle:Status:api_add_sad }
+
+api_video_add_haha:
+    path:     /api/video/add/haha/{token}/
+    defaults: { _controller: AppBundle:Status:api_add_haha }
+
+api_video_add_woow:
+    path:     /api/video/add/woow/{token}/
+    defaults: { _controller: AppBundle:Status:api_add_woow }
+
+
+
+api_video_delete_like:
+    path:     /api/video/delete/like/{token}/
+    defaults: { _controller: AppBundle:Status:api_delete_like }
+    
+api_video_delete_love:
+    path:     /api/video/delete/love/{token}/
+    defaults: { _controller: AppBundle:Status:api_delete_love }
+
+api_video_delete_angry:
+    path:     /api/video/delete/angry/{token}/
+    defaults: { _controller: AppBundle:Status:api_delete_angry }
+
+api_video_delete_sad:
+    path:     /api/video/delete/sad/{token}/
+    defaults: { _controller: AppBundle:Status:api_delete_sad }
+
+api_video_delete_haha:
+    path:     /api/video/delete/haha/{token}/
+    defaults: { _controller: AppBundle:Status:api_delete_haha }
+
+api_video_delete_woow:
+    path:     /api/video/delete/woow/{token}/
+    defaults: { _controller: AppBundle:Status:api_delete_woow }
+
+
+
+
+
+
+#language 
+app_language_add:
+    path: /language/add.html
+    defaults: { _controller: AppBundle:Language:add}
+app_language_index:
+    path: /language/index.html
+    defaults: { _controller: AppBundle:Language:index}
+app_language_edit:
+    path: /language/edit/{id}.html
+    defaults: { _controller: AppBundle:Language:edit}
+    requirements:
+        id:  \d+
+app_language_delete:
+    path: /language/delete/{id}.html
+    defaults: { _controller: AppBundle:Language:delete}
+    requirements:
+        id:  \d+
+app_language_up:
+    path: /language/up/{id}.html
+    defaults: { _controller: AppBundle:Language:up}
+    requirements:
+        id:  \d+
+app_language_down:
+    path: /language/down/{id}.html
+    defaults: { _controller: AppBundle:Language:down}
+    requirements:
+        id:  \d+
+api_language_all:
+    path:     /api/language/all/{token}/
+    defaults: { _controller: AppBundle:Language:api_all }
+#comment
+app_comment_delete:
+    path:     /comment/delete/{id}.html
+    defaults: { _controller: AppBundle:Comment:delete }
+    requirements:
+        id:  \d+
+app_comment_hide:
+    path:     /comment/hide/{id}.html
+    defaults: { _controller: AppBundle:Comment:hide }
+    requirements:
+        id:  \d+  
+app_comment_index:
+    path:     /comment/index.html
+    defaults: { _controller: AppBundle:Comment:index }
+api_comment_add:
+    path:     /api/comment/add/{token}/
+    defaults: { _controller: AppBundle:Comment:api_add }
+    methods: POST
+api_comment_poster_add:
+    path:     /api/comment/poster/add/{token}/
+    defaults: { _controller: AppBundle:Comment:api_add_poster }
+    methods: POST
+api_comment_by_poster:
+    path:     /api/comments/by/poster/{id}/{token}/
+    defaults: { _controller: AppBundle:Comment:api_by_poster }
+    requirements:
+        id:  \d+  
+
+api_comment_channel_add:
+    path:     /api/comment/channel/add/{token}/
+    defaults: { _controller: AppBundle:Comment:api_add_channel }
+    methods: POST
+api_comment_by_channel:
+    path:     /api/comments/by/channel/{id}/{token}/
+    defaults: { _controller: AppBundle:Comment:api_by_channel }
+    requirements:
+        id:  \d+  

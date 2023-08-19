@@ -1,0 +1,170 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% block body %}
+
+    <div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-2">
+                    <button onclick="document.getElementById('id01').style.display='block'"
+                            class="w3-button w3-black btn  btn-lg btn-warning col-md-12"><i class="material-icons"
+                                                                                            style="font-size: 30px;">menu</i>
+                        گزینه ها
+                    </button>
+                </div>
+                <div class="col-md-3">
+                    <a href="{{ path("app_movie_index") }}" class="btn  btn-lg btn-warning col-md-12"><i
+                                class="material-icons"
+                                style="font-size: 30px;">refresh</i>
+                        بروزرسانی </a>
+                </div>
+                <div class="col-md-3">
+                    <a class="btn btn btn-lg btn-yellow col-md-12"><i class="material-icons"
+                                                                      style="font-size: 30px;">movie</i> {{ movies_count }}
+                        فیلم
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="{{ path("app_movie_add") }}" class="btn btn-rose btn-lg pull-right add-button col-md-12"
+                       title=""><i class="material-icons" style="font-size: 30px;">add_box</i> افزودن فیلم جدید </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <input id="route_movie_menu" value="{{ path("app_movie_menu") }}" type="hidden">
+                    <form>
+                        <input name="q" value="{{ app.request.query.get("q") }}" type="text" class="search-input">
+                        <button class="btn btn-sm search-btn"><i class="material-icons"
+                                                                 style="font-size: 30px;">search</i>
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+            <div class="card">
+                <div class="card-content">
+                    <h4 class="card-title">فیلم ها</h4>
+                    <br>
+                    <div class="table-responsive">
+                        <table class="table" width="100%">
+                            <thead class="text-primary">
+                            <tr>
+                                <th>
+                                    <label style="padding: inherit" class="containerposter">
+                                        <input type="checkbox" id="checkall">
+                                        <span class="checkmark"></span>
+                                    </label></th>
+                                <th width="100px">پوستر</th>
+                                <th width="400px">عنوان</th>
+                                <th><i class="material-icons" style="color: orange; font-size: 20px;vertical-align: middle">get_app</i> نوع دانلود
+                                </th>
+                                <th><i class="material-icons" style="color: #21d60a; font-size: 20px;vertical-align: middle">play_circle_filled</i> نوع پخش
+                                </th>
+                                <th>نظرات</th>
+                                <th>وضعیت</th>
+                                <th width="160px">عملیات</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for movie in movies %}
+                                <tr>
+                                    <td>
+                                        <label style="padding: inherit" class="containerposter">
+                                            <input type="checkbox" id="wq" name="poster_ids[]" value="{{ movie.id }}">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <img style="margin: 5px 0;border-radius: 3px" class="avatar-char card"
+                                             src="{{ asset(movie.poster.link)|imagine_filter('poster_thumb') }}">
+                                    </td>
+
+                                    <td>{{ movie.title }}</td>
+                                    <td>
+                                        {% if movie.downloadas == "1" %}
+                                            <span class="label label-default">رایگان</span>
+                                        {% elseif movie.downloadas == "2" %}
+                                            <span class="label label-primary">ویژه</span>
+                                        {% elseif movie.downloadas == "3" %}
+                                            <span class="label label-info">با نمایش تبلیغ</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if movie.playas == "1" %}
+                                            <span class="label label-default">رایگان</span>
+                                        {% elseif movie.playas == "2" %}
+                                            <span class="label label-primary">ویژه</span>
+                                        {% elseif movie.playas == "3" %}
+                                            <span class="label label-info">با نمایش تبلیغ</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if movie.comment == true %}
+                                            <span class="label label-success">فعال</span>
+                                        {% else %}
+                                            <span class="label label-rose">غیر فعال</span>
+                                        {% endif %}
+                                    </td>
+
+                                    <td>
+                                        {% if movie.enabled==true %}
+                                            <span class="label label-success">فعال</span>
+                                        {% else %}
+                                            <span class="label label-danger">غیر فعال</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <a href="{{ path("app_movie_edit",{"id":movie.id}) }}" rel="tooltip"
+                                           data-placement="left"
+                                           class=" btn btn-primary btn-xs btn-round" data-original-title="Edit">
+                                            <i class="material-icons">edit</i>
+                                        </a>
+                                        {% if movie.cover != null %}
+                                            <a href="{{ path("app_home_notif_poster",{title:movie.title,id:movie.id,image:asset(movie.cover.link)|imagine_filter("cover_thumb"),icon:asset(movie.poster.link)|imagine_filter("poster_thumb")}) }}"
+                                               rel="tooltip" data-placement="left"
+                                               class=" btn btn-primary btn-xs btn-round"
+                                               data-original-title="Noitifcation">
+                                                <i class="material-icons">notifications</i>
+                                            </a>
+                                        {% else %}
+                                            <a href="{{ path("app_home_notif_poster",{title:movie.title,id:movie.id,image:asset(movie.poster.link)|imagine_filter("cover_thumb"),icon:asset(movie.poster.link)|imagine_filter("poster_thumb")}) }}"
+                                               rel="tooltip" data-placement="left"
+                                               class=" btn btn-primary btn-xs btn-round"
+                                               data-original-title="Noitifcation">
+                                                <i class="material-icons">notifications</i>
+                                            </a>
+                                        {% endif %}
+                                        <a href="{{ path("app_movie_delete",{"id":movie.id}) }}" rel="tooltip"
+                                           data-placement="left"
+                                           class=" btn btn-danger btn-xs btn-round" data-original-title="Delete">
+                                            <i class="material-icons">delete</i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="4">
+                                        <br>
+                                        <br>
+                                        <center><img src="{{ asset("img/bg_empty.png") }}"
+                                                     style="width: auto !important;"></center>
+                                        <br>
+                                        <br>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class=" pull-right">
+                {{ knp_pagination_render(movies) }}
+            </div>
+
+
+        </div>
+    </div>
+
+
+{% endblock %}

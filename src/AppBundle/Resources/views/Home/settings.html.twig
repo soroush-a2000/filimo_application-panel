@@ -1,0 +1,113 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="tab-moivie">
+                        <a href="{{ path("app_home_settings") }}" class="btn btn-tab-movie-active col-md-12"><i
+                                    class="material-icons">settings</i> تنظیمات عمومی </a>
+                        <a href="{{ path("app_home_ads") }}" class="btn btn-tab-movie col-md-12"><i
+                                    class="material-icons">monetization_on</i> تنظیمات تبلیغات </a>
+                        <a href="{{ path("fos_user_change_password") }}" class="btn btn-tab-movie col-md-12"><i
+                                    class="material-icons">lock</i> تغییر رمز عبور </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-header card-header-icon" data-background-color="rose">
+                        <i class="material-icons">settings</i>
+                    </div>
+                    <div class="card-content">
+                        <h4 class="card-title">تنظیمات عمومی</h4>
+                        {{ form_start(form) }}
+                        <br>
+                        <div class="form-group label-floating" style="display: none; ">
+                            <label class="control-label">نام اپلیکیشن : </label>
+                            {{ form_widget(form.appname,{"attr":{"class":"form-control"}}) }}
+                            <span class="validate-input">{{ form_errors(form.appname) }}</span>
+                        </div>
+                        <div class="form-group label-floating">
+                            <label class="control-label">توکن پوش پل : </label>
+                            {{ form_widget(form.notifkey,{"attr":{"class":"form-control"}}) }}
+                            <span class="validate-input">{{ form_errors(form.notifkey) }}</span>
+                        </div>
+                        <div class="form-group label-floating">
+                            <label class="control-label">شناسه اپلیکیشن در پوش پل  : </label>
+                            {{ form_widget(form.notifappid,{"attr":{"class":"form-control"}}) }}
+                            <span class="validate-input">{{ form_errors(form.notifappid) }}</span>
+                        </div>
+                        <br>
+                        <div class="form-group label-floating">
+                            <label class="control-label">تغییر اتوماتیک بنر (فعال / غیر فعال) :</label>
+                            {{ form_widget(form.autoslider,{"attr":{"class":"form-control"}}) }}
+                            <span class="validate-input">{{ form_errors(form.autoslider) }}</span>
+                        </div>
+                        <div class="form-group label-floating">
+                            <label class="control-label">زمان تغییر بنر (ثانیه) :</label>
+                            {{ form_widget(form.timeslider,{"attr":{"class":"form-control"}}) }}
+                            <span class="validate-input">{{ form_errors(form.timeslider) }}</span>
+                        </div>
+                        <br>
+
+                        <div class="form-group label-floating is-empty">
+                            <label class="control-label">درگاه پرداخت :</label>
+                            {{form_widget(form.paymentgateway,{"attr":{"class":"form-control"}})}}
+                            <span class="validate-input">{{form_errors(form.paymentgateway)}}</span>
+                        </div>
+                        <div class="form-group label-floating">
+                            <label class="control-label">مرچنت کد درگاه پرداخت زرین پال :</label>
+                            {{ form_widget(form.merchantid,{"attr":{"class":"form-control"}}) }}
+                            <span class="validate-input">{{ form_errors(form.merchantid) }}</span>
+                        </div>
+                        <div class="form-group label-floating">
+                            <label class="control-label">کلید API درگاه پرداخت pay.ir :</label>
+                            {{ form_widget(form.payapi,{"attr":{"class":"form-control"}}) }}
+                            <span class="validate-input">{{ form_errors(form.payapi) }}</span>
+                        </div>
+
+                        <div class="form-group label-floating">
+                            <label class="control-label">توضیح کوتاه برای صفحه پرداخت : </label>
+                            {{ form_widget(form.paymentdescription,{"attr":{"class":"form-control"}}) }}
+                            <span class="validate-input">{{ form_errors(form.paymentdescription) }}</span>
+                        </div>
+                        <br>
+                        <div class="form-group label-floating">
+                            <label class="control-label">لینک دانلود اپلیکیشن : </label>
+                            {{ form_widget(form.downloadlink,{"attr":{"class":"form-control"}}) }}
+                            <span class="validate-input">{{ form_errors(form.downloadlink) }}</span>
+                        </div>
+                        <div class="form-group label-floating">
+                            <label class="control-label">توضیح کوتاه درباره اپلیکیشن : </label>
+                            {{ form_widget(form.appdescription,{"attr":{"class":"form-control"}}) }}
+                            <span class="validate-input">{{ form_errors(form.appdescription) }}</span>
+                        </div>
+                        <div class="form-group label-floating">
+                            <label class="control-label">قوانین و مقررات : </label>
+                            {{ form_widget(form.privacypolicy,{"attr":{"class":"form-control"}}) }}
+                            <span class="validate-input">{{ form_errors(form.privacypolicy) }}</span>
+                        </div>
+                        <div class="fileinput fileinput-new text-center" style="width: 100%;"
+                             data-provides="fileinput">
+                            <div class="fileinput-new thumbnail" style="    width: 100%;">
+                                <img id="img-preview" src="{{ asset(form.vars.value.media.link) }}" width="100%">
+                                <a href="#" class="btn btn-rose btn-round btn-select"><i
+                                            class="material-icons">image</i> انتخاب تصویر </a>
+
+                            </div>
+                            {{ form_widget(form.file,{"attr":{"class":"file-hidden input-file img-selector","style":"    display: none;"}}) }}
+                        </div>
+                        <span class="validate-input">{{ form_errors(form.file) }}</span>
+                    </div>
+                    <span class="pull-right"><a href="{{ path("app_category_index") }}"
+                                                class="btn btn-fill btn-yellow"><i
+                                    class="material-icons">arrow_forward</i> لغو</a>{{ form_widget(form.save,{attr:{"class":"btn btn-fill btn-rose"}}) }}</span>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}

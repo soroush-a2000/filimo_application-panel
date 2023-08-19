@@ -1,0 +1,343 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% block body%}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="rose">
+                    <i class="material-icons">movie</i>
+                </div>
+                <div class="card-content">
+                    <p class="category">فیلم ها</p>
+                     <h3 class="title">{{movies_count}}</h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons">keyboard_arrow_right</i><a style="font-size: 14px" href="{{path("app_movie_index")}}">لیست فیلم ها</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="rose">
+                    <i class="material-icons">tv</i>
+                </div>
+                <div class="card-content">
+                    <p class="category">سریال ها</p>
+                     <h3 class="title">{{series_count}}</h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons">keyboard_arrow_right</i><a style="font-size: 14px" href="{{path("app_serie_index")}}">لیست سریال ها</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="rose">
+                    <i class="material-icons">live_tv</i>
+                </div>
+                <div class="card-content">
+                    <p class="category">کانال ها</p>
+                     <h3 class="title">{{channels_count}}</h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons">keyboard_arrow_right</i><a style="font-size: 14px" href="{{path("app_channel_index")}}">لیست کانال ها</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="orange">
+                    <i class="material-icons">label</i>
+                </div>
+                <div class="card-content">
+                    <p class="category">ژانر ها</p>
+                     <h3 class="title">{{genre_count}}</h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons">keyboard_arrow_right</i><a style="font-size: 14px" href="{{path("app_genre_index")}}">لیست ژانر ها</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="orange">
+                    <i class="material-icons">theaters</i>
+                </div>
+                <div class="card-content">
+                    <p class="category">پکیج های اشتراک</p>
+                     <h3 class="title">{{package_count}}</h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons">keyboard_arrow_right</i><a style="font-size: 14px" href="{{path("app_package_index")}}">لیست پکیج ها</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="orange">
+                    <i class="material-icons">view_list</i>
+                </div>
+                <div class="card-content">
+                    <p class="category">دسته بندی های کانال</p>
+                    <h3 class="title">{{category_count}}</h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons">keyboard_arrow_right</i><a style="font-size: 14px" href="{{path("app_category_index")}}">لیست دسته بندی ها</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="blue">
+                    <i class="material-icons">public</i>
+                </div>
+                <div class="card-content">
+                    <p class="category">کشور ها</p>
+                     <h3 class="title">{{country_count}}</h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons">keyboard_arrow_right</i><a style="font-size: 14px" href="{{path("app_country_index")}}">لیست کشور ها</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="blue">
+                    <i class="material-icons">recent_actors</i>
+                </div>
+                <div class="card-content">
+                    <p class="category">عوامل سازنده</p>
+                     <h3 class="title">{{actor_count}}</h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons">keyboard_arrow_right</i><a style="font-size: 14px" href="{{path("app_actor_index")}}">لیست عوامل سازنده</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="blue">
+                    <i class="material-icons">slideshow</i>
+                </div>
+                <div class="card-content">
+                    <p class="category">بنر ها</p>
+                     <h3 class="title">{{slide_count}}</h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons">keyboard_arrow_right</i><a style="font-size: 14px" href="{{path("app_slide_index")}}">لیست بنر ها</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="green">
+                    <i class="material-icons">remove_red_eye</i>
+                </div>
+                <div class="card-content">
+                    <p class="category">بازدید فیلم ها</p>
+                     <h3 class="title">{{movie_views}}</h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons">keyboard_arrow_right</i><a style="font-size: 14px" href="{{path("app_movie_index")}}">لیست فیلم ها</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="green">
+                    <i class="material-icons">cloud_download</i>
+                </div>
+                <div class="card-content">
+                    <p class="category">دانلود فیلم ها</p>
+                     <h3 class="title">{{movie_downloads}}</h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons">keyboard_arrow_right</i><a style="font-size: 14px" href="{{path("app_movie_index")}}">لیست فیلم ها</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="green">
+                    <i class="material-icons">share</i>
+                </div>
+                <div class="card-content">
+                    <p class="category">اشتراک گذاری فیلم ها</p>
+                     <h3 class="title">{{movie_shares}}</h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons">keyboard_arrow_right</i><a style="font-size: 14px" href="{{path("app_movie_index")}}">لیست فیلم ها</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="red">
+                    <i class="material-icons">remove_red_eye</i>
+                </div>
+                <div class="card-content">
+                    <p class="category">بازدید سریال ها</p>
+                     <h3 class="title">{{serie_views}}</h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons">keyboard_arrow_right</i><a style="font-size: 14px" href="{{path("app_serie_index")}}">لیست سریال ها</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="red">
+                    <i class="material-icons">cloud_download</i>
+                </div>
+                <div class="card-content">
+                    <p class="category">دانلود سریال ها</p>
+                     <h3 class="title">{{serie_downloads}}</h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons">keyboard_arrow_right</i><a style="font-size: 14px" href="{{path("app_serie_index")}}">لیست سریال ها</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="red">
+                    <i class="material-icons">share</i>
+                </div>
+                <div class="card-content">
+                    <p class="category">اشتراک گذاری سریال ها</p>
+                     <h3 class="title">{{serie_shares}}</h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons">keyboard_arrow_right</i><a style="font-size: 14px" href="{{path("app_serie_index")}}">لیست سریال ها</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="purple">
+                    <i class="material-icons">remove_red_eye</i>
+                </div>
+                <div class="card-content">
+                    <p class="category">بازدید کانال ها</p>
+                     <h3 class="title">{{channel_views}}</h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons">keyboard_arrow_right</i><a style="font-size: 14px" href="{{path("app_channel_index")}}">لیست کانال ها</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="purple">
+                    <i class="material-icons">share</i>
+                </div>
+                <div class="card-content">
+                    <p class="category">اشتراک گذاری کانال ها</p>
+                     <h3 class="title">{{channel_shares}}</h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons">keyboard_arrow_right</i><a style="font-size: 14px" href="{{path("app_channel_index")}}">لیست کانال ها</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="purple">
+                    <i class="material-icons">comment</i>
+                </div>
+                <div class="card-content">
+                    <p class="category">نظرات</p>
+                     <h3 class="title">{{comment_count}}</h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons">keyboard_arrow_right</i><a style="font-size: 14px" href="{{path("app_comment_index")}}">لیست نظرات</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="black">
+                    <i class="material-icons">message</i>
+                </div>
+                <div class="card-content">
+                    <p class="category">پشتیبانی و بازخورد</p>
+                     <h3 class="title">{{support_count}}</h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons">keyboard_arrow_right</i><a style="font-size: 14px" href="{{path("app_support_index")}}">لیست پیام ها</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="black">
+                    <i class="material-icons">info</i>
+                </div>
+                <div class="card-content">
+                    <p class="category">نسخه</p>
+                     <h3 class="title">{{version_count}}</h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons">keyboard_arrow_right</i><a style="font-size: 14px" href="{{path("app_version_index")}}">لیست نسخه ها</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="black">
+                    <i class="material-icons">devices_other</i>
+                </div>
+                <div class="card-content">
+                    <p class="category">نصب</p>
+                    <h3 class="title">{{devices_count}}</h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons">perm_device_information</i><span style="font-size: 14px"> تعداد نصب اپلیکیشن</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock%}

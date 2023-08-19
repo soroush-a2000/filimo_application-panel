@@ -1,0 +1,103 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% block body%}
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card card-stats" style="margin: 15px 0;">
+					<div class="card-content views-body  pull-right">
+						<a href="#" class="btn btn-tab-movie"><i class="material-icons">remove_red_eye</i> {{serie.viewscountnumber}} مشاهده </a>
+						<a href="#" class="btn btn-tab-movie pull-right"><i class="material-icons">share</i> {{serie.sharesnumber}} اشتراک گذاری </a>
+						<a href="#" class="btn btn-tab-movie pull-right"><i class="material-icons">cloud_download</i> {{serie.downloadscountnumber}} دانلود </a>
+					</div>
+					<div class="card-header " data-background-color="green">
+						<i class="material-icons">tv</i>
+					</div>
+					<div class="card-content trailer-body">
+						<h4 class="title"> ویرایش :  {{serie.title }} </b></h4>
+						<div class="tab-moivie">
+							<a href="{{path("app_serie_edit",{"id":serie.id})}}" class="btn btn-tab-movie"><i class="material-icons">edit</i> ویرایش </a>
+							<a href="{{path("app_serie_cast",{"id":serie.id})}}" class="btn btn-tab-movie"><i class="material-icons">recent_actors</i> عوامل سازنده </a>
+							<a href="{{path("app_serie_trailer",{"id":serie.id})}}" class="btn btn-tab-movie"><i class="material-icons">movie_filter</i> پیشنمایش </a>
+							<a href="{{path("app_serie_seasons",{"id":serie.id})}}" class="btn btn-tab-movie"><i class="material-icons">dynamic_feed</i> فصل ها </a>
+							<a href="{{path("app_serie_comments",{"id":serie.id})}}" class="btn btn-tab-movie-active"><i class="material-icons">comment</i> نظرات </a>
+							<a href="{{path("app_serie_ratings",{"id":serie.id})}}" class="btn btn-tab-movie"><i class="material-icons">star_half</i> امتیازات </a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="card">
+					<div class="card-header card-header-icon" data-background-color="rose">
+						<i class="material-icons">comment</i>
+					</div>
+					<div class="card-content">
+						<h4 class="card-title">{{serie.title}}: {{count}} نظر  </h4>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						{% for comment in pagination %}
+							<div class="col-md-6">
+								<ul class="timeline timeline-simple">
+									<li class="timeline-inverted">
+										<div class="timeline-badge info">
+											{% if comment.user.media != null %}
+												{% if comment.user.media.type =="link" %}
+													<img class="avatar-char palette-Red-400 bg"  style="border-radius: 100px;    border: 0.5px solid #ccc;" src="{{comment.user.media.url}}" alt="">
+												{% else %}
+													<img class="avatar-char palette-Red-400 bg"  style="border-radius: 100px;    border: 0.5px solid #ccc;" src="{{asset(comment.user.media.link)|imagine_filter('actor_thumb')}}" alt="">
+												{% endif %}
+											{% else %}
+												<img class="avatar-char palette-Red-400 bg"  style="border-radius: 100px;    border: 0.5px solid #ccc;" src="{{asset("img/avatar.jpg")|imagine_filter('actor_thumb')}}" alt="">
+											{% endif %}
+										</div>
+										<div class="timeline-panel">
+											<div class="timeline-heading">
+												<a href="{{path("user_user_edit",{id:comment.user.id})}}" title="">
+													<span class="label label-danger">{{comment.user.name}}</span>
+												</a>
+												<span class="pull-right" >
+													<a href="{{path("app_comment_delete",{id:comment.id,"poster":"true"})}}"  rel="tooltip" data-placement="bottom" title="" data-original-title="Delete">
+														<i class="material-icons" style="color:red">delete</i>
+													</a>
+													{% if comment.enabled %}
+														<a href="{{path("app_comment_hide",{id:comment.id})}}"  rel="tooltip" data-placement="bottom" title="" data-original-title="Hide">
+															<i class="material-icons">visibility_off</i>
+														</a>
+													{% else %}
+														<a href="{{path("app_comment_hide",{id:comment.id})}}"  rel="tooltip" data-placement="bottom" title="" data-original-title="Show">
+															<i class="material-icons">remove_red_eye</i>
+														</a>
+													{% endif %}
+												</span>
+											</div>
+											<div class="timeline-body">
+												<p>{{comment.contentclear}}</p>
+											</div>
+											<hr class="hr-10">
+											<small class="pull-right label label-rose">
+											<span>{{comment.created|ago}}</span>
+											</small>
+										</div>
+									</li>
+									
+								</ul>
+							</div>
+						{% else %}
+							<div class="card"  style="text-align: center;" >
+								<br>
+								<br>
+								<img src="{{asset("img/bg_empty.png")}}"  style="width: auto !important;">
+								<br>
+								<br>
+							</div>
+						{% endfor %}
+					</div>
+					<div class=" pull-right">
+						{{ knp_pagination_render(pagination) }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock%}

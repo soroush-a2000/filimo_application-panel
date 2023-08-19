@@ -1,0 +1,205 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% block body%}
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-3">
+				<div class="card">
+					<div class="tab-moivie">
+						<a href="{{path("app_channel_edit",{"id":channel.id})}}" class="btn btn-tab-movie col-md-12"><i class="material-icons">edit</i> ویرایش</a>
+						<a href="{{path("app_channel_sources",{"id":channel.id})}}" class="btn btn-tab-movie col-md-12"><i class="material-icons">folder</i> منابع </a>
+						<a href="{{path("app_channel_comments",{"id":channel.id})}}" class="btn btn-tab-movie col-md-12"><i class="material-icons">comment</i> نظرات </a>
+						<a href="{{path("app_channel_ratings",{"id":channel.id})}}" class="btn btn-tab-movie-active col-md-12"><i class="material-icons">star_half</i> امتیازات </a>
+						<a href="#" class="btn btn-tab-movie col-md-12"><i class="material-icons">remove_red_eye</i> {{channel.viewsnumber}} مشاهده </a>
+						<a href="#" class="btn btn-tab-movie col-md-12"><i class="material-icons">share</i> {{channel.sharesnumber}} اشتراک گذاری </a>
+						<a href="{{path("app_channel_index")}}" class="btn btn-tab-movie col-md-12"><i class="material-icons">arrow_forward</i> لغو</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-9">
+				<div class="card">
+					<div class="card-header card-header-icon" data-background-color="rose">
+						<i class="material-icons">star_half</i>
+					</div>
+					<div class="card-content">
+						<h4 class="card-title">{{channel.title}}: {{count}} امتیاز </h4>
+					</div>
+				</div>
+				<div class="card" >
+					<div class="status-bar"></div>
+					<div class="action-bar">
+						<a href="#" class="zmdi zmdi-star"></a>
+					</div>
+					{% set rate  =  rating %}
+					{% set rate_main  =  rating %}
+					<div class="list-group lg-alt lg-even-black">
+						<br>
+						<table width="100%" >
+							<tr>
+								<td colspan="2" style="padding: 15px;" align="right">
+									<div >
+										{% for i in 1..5 %}
+											{% if rate >= 1 %}
+												<img src="{{asset("img/star.png")}}" style="height:50px;width:50px">
+											{% endif %}
+											{% if rate >= 0.25 and  rate < 0.75 %}
+												<img src="{{asset("img/star_h.png")}}" style="height:50px;width:50px">
+											{% endif %}
+											{% if rate >= 0.75 and  rate < 1 %}
+												<img src="{{asset("img/star.png")}}" style="height:50px;width:50px">
+											{% endif %}
+											{% if rate < 0.25 %}
+												<img src="{{asset("img/star_e.png")}}" style="height:50px;width:50px">
+											{% endif %}
+											{% set rate  =  rate - 1 %}
+										{% endfor %}
+									</div>
+								</td>
+								<td>
+									<span style="height: 28px;display: inline-block;font-size: 30pt;font-weight: bold;padding-right: 20px;">امتیاز : {{rate_main|number_format(1, '.', ',')}}</span>
+									`
+								</td>
+							</tr>
+							<tr>
+								<td width="50%" align="right" style="padding: 5px;">
+									<img src="{{asset("img/star.png")}}" style="height:30px;width:30px">
+									<img src="{{asset("img/star.png")}}" style="height:30px;width:30px">
+									<img src="{{asset("img/star.png")}}" style="height:30px;width:30px">
+									<img src="{{asset("img/star.png")}}" style="height:30px;width:30px">
+									<img src="{{asset("img/star.png")}}" style="height:30px;width:30px">
+								</td>
+								<td width="30px" align="center">{{ratings.rate_5}}</td>
+								<td  align="left" style="padding:10px">
+									<span style="display:block;height:15px;background-color:black;border-radius: 12px;width:{{values.rate_5}}%"></span>
+								</td>
+							</tr>
+							<tr>
+								<td width="50%" align="right" style="padding: 5px;">
+									<img src="{{asset("img/star_e.png")}}" style="height:30px;width:30px">
+									<img src="{{asset("img/star.png")}}" style="height:30px;width:30px">
+									<img src="{{asset("img/star.png")}}" style="height:30px;width:30px">
+									<img src="{{asset("img/star.png")}}" style="height:30px;width:30px">
+									<img src="{{asset("img/star.png")}}" style="height:30px;width:30px">
+								</td>
+								<td width="30px" align="center">{{ratings.rate_4}}</td>
+								<td  align="left" style="padding:10px">
+									<span style="display:block;height:15px;background-color:black;border-radius: 12px;width:{{values.rate_4}}%"></span>
+								</td>
+							</tr>
+							<tr>
+								<td width="50%" align="right" style="padding: 5px;">
+									<img src="{{asset("img/star_e.png")}}" style="height:30px;width:30px">
+									<img src="{{asset("img/star_e.png")}}" style="height:30px;width:30px">
+									<img src="{{asset("img/star.png")}}" style="height:30px;width:30px">
+									<img src="{{asset("img/star.png")}}" style="height:30px;width:30px">
+									<img src="{{asset("img/star.png")}}" style="height:30px;width:30px">
+								</td>
+								<td width="30px" align="center">{{ratings.rate_3}}</td>
+								<td  align="left" style="padding:10px">
+									<span style="display:block;height:15px;background-color:black;border-radius: 12px;width:{{values.rate_3}}%"></span>
+								</td>
+							</tr>
+							<tr>
+								<td width="50%" align="right" style="padding: 5px;">
+									
+									<img src="{{asset("img/star_e.png")}}" style="height:30px;width:30px">
+									<img src="{{asset("img/star_e.png")}}" style="height:30px;width:30px">
+									<img src="{{asset("img/star_e.png")}}" style="height:30px;width:30px">
+									<img src="{{asset("img/star.png")}}" style="height:30px;width:30px">
+									<img src="{{asset("img/star.png")}}" style="height:30px;width:30px">
+								</td>
+								<td width="30px" align="center">{{ratings.rate_2}}</td>
+								<td  align="left" style="padding:10px">
+									<span style="display:block;height:15px;background-color:black;border-radius: 12px;width:{{values.rate_2}}%"></span>
+								</td>
+							</tr>
+							<tr>
+								<td width="50%" align="right" style="padding: 5px;">
+									<img src="{{asset("img/star_e.png")}}" style="height:30px;width:30px">
+									<img src="{{asset("img/star_e.png")}}" style="height:30px;width:30px">
+									<img src="{{asset("img/star_e.png")}}" style="height:30px;width:30px">
+									<img src="{{asset("img/star_e.png")}}" style="height:30px;width:30px">
+									<img src="{{asset("img/star.png")}}" style="height:30px;width:30px">
+								</td>
+								<td width="30px" align="center">{{ratings.rate_1}}</td>
+								<td  align="left" style="padding:10px">
+									<span style="display:block;height:15px;background-color:black;border-radius: 12px;width:{{values.rate_1}}%"></span>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div class="row">
+					{% for rate in pagination %}
+						<div class="col-md-12">
+							<ul class="timeline timeline-simple">
+								<li class="timeline-inverted">
+									<div class="timeline-badge info">
+										{% if rate.user.media != null %}
+											{% if rate.user.media.type =="link" %}
+												<img class="avatar-char palette-Red-400 bg"  style="border-radius: 100px;    border: 0.5px solid #ccc;" src="{{rate.user.media.url}}" alt="">
+											{% else %}
+												<img class="avatar-char palette-Red-400 bg"  style="border-radius: 100px;    border: 0.5px solid #ccc;" src="{{asset(rate.user.media.link)|imagine_filter('actor_thumb')}}" alt="">
+											{% endif %}
+										{% else %}
+											<img class="avatar-char palette-Red-400 bg"  style="border-radius: 100px;    border: 0.5px solid #ccc;" src="{{asset("img/avatar.jpg")|imagine_filter('actor_thumb')}}" alt="">
+										{% endif %}
+									</div>
+									<div class="timeline-panel">
+										<div class="timeline-heading">
+											<a href="{{path("user_user_edit",{id:rate.user.id})}}" title="">
+												<span class="label label-danger">{{rate.user.name}}</span>
+											</a>
+										</div>
+										<div class="timeline-body">
+											<p>
+												<div style="float: left;">
+													{% set rate_value = rate.value %}
+													{% for i in 1..5 %}
+														{% if rate_value >= 1 %}
+															<img src="{{asset("img/star.png")}}" style="height:50px;width:50px">
+														{% endif %}
+														{% if rate_value >= 0.25 and  rate_value < 0.75 %}
+															<img src="{{asset("img/star_h.png")}}" style="height:50px;width:50px">
+														{% endif %}
+														{% if rate_value >= 0.75 and  rate_value < 1 %}
+															<img src="{{asset("img/star.png")}}" style="height:50px;width:50px">
+														{% endif %}
+														{% if rate_value < 0.25 %}
+															<img src="{{asset("img/star_e.png")}}" style="height:50px;width:50px">
+														{% endif %}
+														{% set rate_value  =  rate_value - 1 %}
+													{% endfor %}
+												</div>
+												<span style="line-height: 50px;display: inline-block;font-size: 56pt;font-weight: bold;padding-right: 20px;">{{rate.value}}</span>
+												<br>
+											</p>
+										</div>
+										<hr>
+										<small class="pull-right label label-rose">
+										<span>{{rate.created|ago}}</span>
+										</small>
+									</div>
+								</li>
+								
+							</ul>
+						</div>
+					{% else %}
+						<div class="col-md-12">
+							<div class="card"  style="text-align: center;" >
+								<br>
+								<br>
+								<img src="{{asset("img/bg_empty.png")}}"  style="width: 100% !important;">
+								<br>
+								<br>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+			<div class=" pull-right">
+				{{ knp_pagination_render(pagination) }}
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock%}

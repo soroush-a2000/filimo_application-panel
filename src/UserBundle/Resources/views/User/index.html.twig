@@ -1,0 +1,104 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% block body%}
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="row">
+					<div class="col-md-6">
+						<a href="{{path("user_user_index")}}" class="btn  btn-lg btn-warning col-md-12"><i class="material-icons" style="font-size: 30px;">refresh</i> بروزرسانی </a>
+					</div>
+					<div class="col-md-6">
+						<a class="btn btn btn-lg btn-yellow col-md-12"><i class="material-icons" style="font-size: 30px;">group</i> {{(users|length)-1}} کاربر</a>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<form>
+							<input name="q" value="{{app.request.query.get("q")}}" type="text" class="search-input">
+							<button class="btn btn-sm search-btn"><i class="material-icons" style="font-size: 30px;">search</i></button>
+						</form>
+					</div>
+				</div>
+				<div class="card">
+					<div class="card-content">
+						<h4 class="card-title">لیست کاربران</h4>
+						<div class="table-responsive">
+							<table class="table" width="100%">
+								<thead class="text-primary">
+									<tr>
+										<th width="70px">#</th>
+										<th>نام</th>
+										<th>شماره موبایل</th>
+										<th>اشتراک</th>
+										<th>وضعیت</th>
+										<th width="160px">گزینه ها</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for user in pagination %}
+										<tr>
+											<td width="70px">
+												<div class="avatar">
+													{% if user.media != null %}
+														{% if user.media.type =="link" %}
+															<img class="avatar-char palette-Red-400 bg"  style="border-radius: 100px;    border: 0.5px solid #ccc;" src="{{user.media.url}}" alt="">
+														{% else %}
+																	 <img class="avatar-char palette-Red-400 bg"  style="border-radius: 100px;    border: 0.5px solid #ccc;" src="{{asset(user.media.link)|imagine_filter('actor_thumb')}}" alt="">
+														{% endif %}
+													{% else %}
+														<img class="avatar-char palette-Red-400 bg"  style="border-radius: 100px;    border: 0.5px solid #ccc;" src="{{asset("img/avatar.jpg")|imagine_filter('actor_thumb')}}" alt="">
+													{% endif %}
+													{% if user.type=="facebook" %}
+														<img class="badge-avatar" src="{{asset("img/facebook.png")}}" >
+													{% elseif user.type=="google" %}
+														<img class="badge-avatar" src="{{asset("img/google.png")}}" >
+													{% elseif user.type=="phone" %}
+														<img class="badge-avatar" src="{{asset("img/phone.png")}}" >
+													{% endif %}
+												</div>
+											</td>
+											<td>{{user.name}}</td>
+											<td>{{user.username}}</td>
+											<td>
+												<span class="label label-info"> {{user.remainindays}} روز </span>
+											<td>
+												{% if user.enabled==true %}
+													<span class="label label-success">فعال</span>
+												{% else %}
+													<span class="label label-danger">غیر فعال</span>
+												{% endif %}
+											</td>
+
+
+											<td>
+												<a href="{{path("user_user_edit",{"id":user.id})}}" rel="tooltip" data-placement="left" class=" btn btn-primary btn-xs btn-round" data-original-title="View">
+													<i class="material-icons">edit</i>
+												</a>
+												<a href="{{path("user_user_delete",{"id":user.id})}}" rel="tooltip" data-placement="left" class=" btn btn-danger btn-xs btn-round" data-original-title="Delete">
+													<i class="material-icons">delete</i>
+												</a>
+											</td>
+										</tr>
+									{% else %}
+										<tr>
+											<td colspan="4">
+												<br>
+												<br>
+												<center><img src="{{asset("img/bg_empty.png")}}"  style="width: auto !important;"></center>
+												<br>
+												<br>
+											</td>
+										</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class=" pull-right">
+					{{ knp_pagination_render(pagination) }}
+				</div>
+			</div>
+		</div>
+
+	{% endblock%}

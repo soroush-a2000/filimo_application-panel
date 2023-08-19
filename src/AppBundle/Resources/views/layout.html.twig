@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="{{asset("img/apple-icon.png")}}" />
+    <link rel="icon" type="image/png" href="{{asset("img/favicon.png")}}" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>پنل مدیریت</title>
+
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+
+    <!-- Bootstrap core CSS     -->
+    <link href="{{asset("css/bootstrap.min.css")}}" rel="stylesheet" />
+
+    <!--  Material Dashboard CSS    -->
+    <link href="{{asset("css/material-dashboard.css")}}" rel="stylesheet"/>
+
+    <!--  CSS for Demo Purpose, don't include it in your project     -->
+    <link href="{{asset("css/demo.css")}}" rel="stylesheet" />
+
+    <link href="{{asset("css/dialog.css")}}"  rel="stylesheet">
+
+    <!--  CSS for font iransans    -->
+    <link href="{{asset("css/style-fa.css")}}" rel="stylesheet"/>
+
+    <!--     Fonts and icons     -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
+    <script src="{{asset("js/jscolor.js")}}"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="{{asset("lib/css/emoji.css")}}" rel="stylesheet">
+    <link href="{{asset("giflib/gifplayer.css")}}" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="{{asset("tags/css/normalize.css")}}">
+    <!--[if IE 8]><script src="{{asset("js/es5.js")}}"></script><![endif]-->
+    <script src="{{asset("js/jquery.min.js")}}"></script>
+    <script src="{{asset("tags/js/standalone/selectize.js")}}"></script>
+    <link rel="stylesheet" href="{{asset("tags/css/selectize.default.css")}}">
+
+    <style>.change_menu {display:none}</style>
+</head>
+
+<body>
+    {% for type, messages in app.session.flashbag.all() %}
+        {% for message in messages %}
+            <div class="alert  alert-with-icon alert-dashborad" data-notify="container"  style="position: absolute;right: 20px;top: 0px;z-index: 1000;">
+                <i class="material-icons" data-notify="icon">notifications</i>
+                <button type="button" aria-hidden="true" class="close">
+                    <i class="material-icons">close</i>
+                </button>
+                <span data-notify="message">{{message|trans}}</span>
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    <div id="id01" style="display:none" class="w3-modal">
+        <div class="w3-modal-content w3-card-4 w3-animate-zoom">
+            <header class="w3-container w3-gray">
+                <h6></h6>
+            </header>
+
+            <div class="w3-bar w3-border-bottom">
+                <button class="tablink w3-bar-item w3-button" onclick="openTab(event, 'one')">نوع دانلود</button>
+                <button class="tablink w3-bar-item w3-button" onclick="openTab(event, 'two')">نوع پخش</button>
+                <button class="tablink w3-bar-item w3-button" onclick="openTab(event, 'three')">نظرات</button>
+                <button class="tablink w3-bar-item w3-button" onclick="openTab(event, 'four')">وضعیت</button>
+            </div>
+
+            <div id="one" class="w3-container change_menu">
+                <center> <h4>تغییر نوع دانلود انتخاب شده ها به :</h4>    </center>
+                <div class="row">
+                    <div class="col-md-4">
+                        <button type="button" id="btn_do_free_movies" class="btn btn-danger btn-lg pull-right add-button col-md-12">
+                            <i class="material-icons" style="font-size: 30px; ">tag_faces</i> رایگان <div></div>
+                        </button>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="button" id="btn_do_special_movies" class="btn btn-danger btn-lg pull-right add-button col-md-12">
+                            <i class="material-icons" style="font-size: 30px; ">monetization_on</i> ویژه <div></div>
+                        </button>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="button" id="btn_do_advertise_movies" class="btn btn-danger btn-lg pull-right add-button col-md-12">
+                            <i class="material-icons" style="font-size: 30px; ">redeem</i> نمایش تبلیغ <div></div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="two" class="w3-container change_menu">
+                <center> <h4>تغییر نوع پخش انتخاب شده ها به :</h4>    </center>
+                <div class="row">
+                    <div class="col-md-4">
+                        <button type="button" id="btn_play_free_movies" class="btn btn-dribbble btn-lg pull-right add-button col-md-12">
+                            <i class="material-icons" style="font-size: 30px; ">tag_faces</i> رایگان <div></div>
+                        </button>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="button" id="btn_play_special_movies" class="btn btn-dribbble btn-lg pull-right add-button col-md-12">
+                            <i class="material-icons" style="font-size: 30px; ">monetization_on</i> ویژه <div></div>
+                        </button>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="button" id="btn_play_advertise_movies" class="btn btn-dribbble btn-lg pull-right add-button col-md-12">
+                            <i class="material-icons" style="font-size: 30px; ">redeem</i> نمایش تبلیغ <div></div>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="three" class="w3-container change_menu">
+                <center> <h4>تغییر وضعیت نظرات به : </h4>    </center>
+                <div class="row">
+                    <div class="col-md-6">
+                        <button type="button" id="btn_comment_activate_movies" class="btn btn-primary btn-lg pull-right add-button col-md-12">
+                            <i class="material-icons" style="font-size: 30px; ">comment</i> فعال <div></div>
+                        </button>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="button" id="btn_comment_deactivate_movies" class="btn btn-primary btn-lg pull-right add-button col-md-12">
+                            <i class="material-icons" style="font-size: 30px; ">speaker_notes_off</i> غیر فعال <div></div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="four" class="w3-container change_menu">
+                <center> <h4>تغییر وضعیت انتخاب شده ها به : </h4>    </center>
+                <div class="row">
+                    <div class="col-md-6">
+                        <button type="button" id="btn_activate_movies" class="btn btn-behance btn-lg pull-right add-button col-md-12">
+                            <i class="material-icons" style="font-size: 30px; ">visibility</i> فعال <div></div>
+                        </button>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="button" id="btn_deactivate_movies" class="btn btn-behance  btn-lg pull-right add-button col-md-12">
+                            <i class="material-icons" style="font-size: 30px; ">visibility_off</i> غیر فعال <div></div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="w3-container w3-light-grey w3-padding">
+                <button class="w3-button w3-right w3-white w3-border" onclick="document.getElementById('id01').style.display='none'">بستن
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="id02" style="display:none" class="w3-modal">
+        <div class="w3-modal-content w3-card-4 w3-animate-zoom">
+            <header class="w3-container w3-gray">
+                <h6></h6>
+            </header>
+            <div class="w3-container">
+                <center> <h4>تغییر وضعیت نظرات به : </h4>    </center>
+                <div class="row">
+                    <div class="col-md-6">
+                        <button type="button" id="btn_comment_activate_series" class="btn btn-primary btn-lg pull-right add-button col-md-12">
+                            <i class="material-icons" style="font-size: 30px; ">comment</i> فعال <div></div>
+                        </button>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="button" id="btn_comment_deactivate_series" class="btn btn-primary btn-lg pull-right add-button col-md-12">
+                            <i class="material-icons" style="font-size: 30px; ">speaker_notes_off</i> غیر فعال <div></div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <hr>
+            <div class="w3-container">
+                <center> <h4>تغییر وضعیت انتخاب شده ها به : </h4>    </center>
+                <div class="row">
+                    <div class="col-md-6">
+                        <button type="button" id="btn_activate_series" class="btn btn-behance btn-lg pull-right add-button col-md-12">
+                            <i class="material-icons" style="font-size: 30px; ">visibility</i> فعال <div></div>
+                        </button>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="button" id="btn_deactivate_series" class="btn btn-behance  btn-lg pull-right add-button col-md-12">
+                            <i class="material-icons" style="font-size: 30px; ">visibility_off</i> غیر فعال <div></div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="w3-container w3-light-grey w3-padding">
+                <button class="w3-button w3-right w3-white w3-border" onclick="document.getElementById('id02').style.display='none'">بستن
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="id03" style="display:none" class="w3-modal">
+        <div class="w3-modal-content w3-card-4 w3-animate-zoom">
+            <header class="w3-container w3-gray">
+                <h6></h6>
+            </header>
+            <div class="w3-container">
+                <center> <h4>تغییر نوع پخش انتخاب شده ها به :</h4>    </center>
+                <div class="row">
+                    <div class="col-md-4">
+                        <button type="button" id="btn_play_free_channels" class="btn btn-dribbble btn-lg pull-right add-button col-md-12">
+                            <i class="material-icons" style="font-size: 30px; ">tag_faces</i> رایگان <div></div>
+                        </button>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="button" id="btn_play_special_channels" class="btn btn-dribbble btn-lg pull-right add-button col-md-12">
+                            <i class="material-icons" style="font-size: 30px; ">monetization_on</i> ویژه <div></div>
+                        </button>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="button" id="btn_play_advertise_channels" class="btn btn-dribbble btn-lg pull-right add-button col-md-12">
+                            <i class="material-icons" style="font-size: 30px; ">redeem</i> نمایش تبلیغ <div></div>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+            <br>
+            <hr>
+            <div class="w3-container">
+                <center> <h4>تغییر وضعیت نظرات به : </h4>    </center>
+                <div class="row">
+                    <div class="col-md-6">
+                        <button type="button" id="btn_comment_activate_channels" class="btn btn-primary btn-lg pull-right add-button col-md-12">
+                            <i class="material-icons" style="font-size: 30px; ">comment</i> فعال <div></div>
+                        </button>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="button" id="btn_comment_deactivate_channels" class="btn btn-primary btn-lg pull-right add-button col-md-12">
+                            <i class="material-icons" style="font-size: 30px; ">speaker_notes_off</i> غیر فعال <div></div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <hr>
+            <div class="w3-container">
+                <center> <h4>تغییر وضعیت انتخاب شده ها به : </h4>    </center>
+                <div class="row">
+                    <div class="col-md-6">
+                        <button type="button" id="btn_activate_channels" class="btn btn-behance btn-lg pull-right add-button col-md-12">
+                            <i class="material-icons" style="font-size: 30px; ">visibility</i> فعال <div></div>
+                        </button>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="button" id="btn_deactivate_channels" class="btn btn-behance  btn-lg pull-right add-button col-md-12">
+                            <i class="material-icons" style="font-size: 30px; ">visibility_off</i> غیر فعال <div></div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="w3-container w3-light-grey w3-padding">
+                <button class="w3-button w3-right w3-white w3-border" onclick="document.getElementById('id03').style.display='none'">بستن
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="wrapper">
+        <div class="sidebar" data-active-color="orange"  data-background-color="white" >
+            <!--
+                Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
+
+                Tip 2: you can also add an image using data-image tag
+            -->
+            <div class="logo">
+                <a href="{{path("app_home_index")}}" class="simple-text">
+                    <i class="material-icons">dashboard</i> پنل مدیریت
+                </a>
+            </div>
+            <div class="sidebar-wrapper" style="overflow: scroll">
+                <center>
+                    {% if app.user.media %}
+                        <img src="{{asset(app.user.media.link|imagine_filter('user_image'))}}" width="50%" style=" border-radius: 100px;">
+
+                    {% else %}
+                        <img src="{{asset("img/avatar.jpg")}}" width="50%" style=" border-radius: 100px;">
+
+                    {% endif %}
+
+                </center>
+                <ul class="nav">
+                        <li {% if "app_home_index" in  app.request.attributes.get('_route') %} class="active"{% endif %}>
+                            <a href="{{path("app_home_index")}}">
+                                <i class="material-icons">dashboard</i>
+                                <p>داشبورد</p>
+                            </a>
+                        </li>
+                        <li {% if "app_home_notif_" in  app.request.attributes.get('_route') %} class="active"  aria-expanded="true" {% endif %}>
+                            <a data-toggle="collapse" href="#notification" class="" >
+                                <i class="material-icons">notifications_active</i>
+                                <p>اعلانات
+                                    <b class="caret"></b>
+                                </p>
+                            </a>
+                            <div class="collapse {% if "app_home_notif_" in  app.request.attributes.get('_route') %}  in {% endif %}" id="notification" aria-expanded="true" style="">
+                                <ul class="nav">
+                                    <li  {% if "app_home_notif_poster" in  app.request.attributes.get('_route') %} class="active" {% endif %}><a href="{{path("app_home_notif_poster")}}">فیلم / سریال</a></li>
+                                    <li  {% if "app_home_notif_channel" in  app.request.attributes.get('_route') %} class="active" {% endif %}><a href="{{path("app_home_notif_channel")}}">کانال</a></li>
+                                    <li  {% if "app_home_notif_category" in  app.request.attributes.get('_route') %} class="active" {% endif %}><a href="{{path("app_home_notif_category")}}">دسته بندی</a></li>
+                                    <li  {% if "app_home_notif_genre" in  app.request.attributes.get('_route') %} class="active" {% endif %}><a href="{{path("app_home_notif_genre")}}">ژانر</a></li>
+                                    <li  {% if "app_home_notif_url" in  app.request.attributes.get('_route') %} class="active" {% endif %}><a href="{{path("app_home_notif_url")}}">لینک</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li {% if "app_slide_" in  app.request.attributes.get('_route')  %} class="active"{% endif %}>
+                            <a href="{{path("app_slide_index")}}">
+                                <i class="material-icons">slideshow</i>
+                                <p>بنر</p>
+                            </a>
+                        </li>
+                        <li {% if  "app_movie_" in  app.request.attributes.get('_route') %} class="active"{% endif %}>
+                            <a href="{{path("app_movie_index")}}">
+                                <i class="material-icons">movie</i>
+                                <p>فیلم ها</p>
+                            </a>
+                        </li>
+                        <li {% if  "app_serie_" in  app.request.attributes.get('_route') %} class="active"{% endif %}>
+                            <a href="{{path("app_serie_index")}}">
+                                <i class="material-icons">tv</i>
+                                <p>سریال ها</p>
+                            </a>
+                        </li>
+                        <li {% if  "app_channel_" in  app.request.attributes.get('_route') %} class="active"{% endif %}>
+                            <a href="{{path("app_channel_index")}}">
+                                <i class="material-icons">live_tv</i>
+                                <p>کانال ها</p>
+                            </a>
+                        </li>
+                        <li {% if "app_category_" in  app.request.attributes.get('_route')  %} class="active"{% endif %}>
+                            <a href="{{path("app_category_index")}}">
+                                <i class="material-icons">view_list</i>
+                                <p>دسته بندی های کانال</p>
+                            </a>
+                        </li>
+                        <li {% if "app_country_" in  app.request.attributes.get('_route')  %} class="active"{% endif %}>
+                            <a href="{{path("app_country_index")}}">
+                                <i class="material-icons">public</i>
+                                <p>کشور ها</p>
+                            </a>
+                        </li>
+                        <li {% if "app_genre_" in  app.request.attributes.get('_route')  %} class="active"{% endif %}>
+                            <a href="{{path("app_genre_index")}}">
+                                <i class="material-icons">label</i>
+                                <p>ژانر ها</p>
+                            </a>
+                        </li>
+                        <li {% if "app_actor_" in  app.request.attributes.get('_route')  %} class="active"{% endif %}>
+                            <a href="{{path("app_actor_index")}}">
+                                <i class="material-icons">recent_actors</i>
+                                <p>عوامل سازنده</p>
+                            </a>
+                        </li>
+                        <li {% if "language" in  app.request.attributes.get('_route') %} class="active"{% endif %}  >
+                            <a href="{{path("app_language_index")}}">
+                            <i class="material-icons">flag</i>
+                                <p>زبان های زیرنویس</p>
+                            </a>
+                        </li>
+                        <li {% if "comment" in  app.request.attributes.get('_route') %} class="active"{% endif %}  >
+                            <a href="{{path("app_comment_index")}}">
+                            <i class="material-icons">comments</i>
+                                <p>نظرات</p>
+                            </a>
+                        </li>
+                        <li {% if "support" in  app.request.attributes.get('_route') %} class="active"{% endif %}  >
+                            <a href="{{path("app_support_index")}}">
+                            <i class="material-icons">messages</i>
+                                <p>پیام های پشتیبانی</p>
+                            </a>
+                        </li>
+                        <li {% if "version" in  app.request.attributes.get('_route') %} class="active"{% endif %}  >
+                            <a href="{{path("app_version_index")}}">
+                            <i class="material-icons">apps</i>
+                                <p>نسخه های اپلیکیشن</p>
+                            </a>
+                        </li>
+                    <li {% if "package" in  app.request.attributes.get('_route') %} class="active"{% endif %}  >
+                        <a href="{{path("app_package_index")}}">
+                            <i class="material-icons">theaters</i>
+                            <p>پکیج های اشتراک</p>
+                        </a>
+                    </li>
+                        <li {% if "user" in  app.request.attributes.get('_route') %} class="active"{% endif %}  >
+                            <a href="{{path("user_user_index")}}">
+                            <i class="material-icons">group</i><p>کاربران</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{path("app_home_settings")}}">
+                            <i class="material-icons">settings</i><p>تنظیمات</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{path("fos_user_security_logout")}}">
+                            <i class="material-icons">exit_to_app</i><p>خروج</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        <div class="main-panel" style="overflow: scroll">
+            <nav class="navbar navbar-transparent navbar-absolute">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                      <a class="navbar-brand" href="{{path("app_home_index")}}">داشبورد</a>
+                    </div>
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="material-icons">person</i>
+                                    <p class="hidden-lg hidden-md">دسترسی سریع</p>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="{{path("app_home_settings")}}">تنظیمات</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{path("fos_user_security_logout")}}">خروج</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </nav>
+
+            <div class="content">
+                {% block body %}
+
+                {% endblock %}
+            </div>
+
+            <footer class="footer">
+                <div class="container-fluid">
+
+                </div>
+            </footer>
+        </div>
+    </div>
+</body>
+
+    <!--   Core JS Files   -->
+    <script src="{{asset("js/jquery-3.1.0.min.js")}}" type="text/javascript"></script>
+    <script src="{{asset("js/bootstrap.min.js")}}" type="text/javascript"></script>
+    <script src="{{asset("js/material.min.js")}}" type="text/javascript"></script>
+
+    <!--  Notifications Plugin    -->
+    <script src="{{asset("js/bootstrap-notify.js")}}"></script>
+
+    <!--  Google Maps Plugin    -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+
+    <!-- Material Dashboard javascript methods -->
+    <script src="{{asset("js/material-dashboard.js")}}"></script>
+
+    <!-- Material Dashboard DEMO methods, don't include it in your project! -->
+    <script src="{{asset("js/demo.js")}}"></script>
+    <script src="{{asset("js/app.js")}}"></script>
+  <script src="{{asset("lib/js/config.js")}}"></script>
+  <script src="{{asset("lib/js/util.js")}}"></script>
+  <script src="{{asset("lib/js/jquery.emojiarea.js")}}"></script>
+  <script src="{{asset("lib/js/emoji-picker.js")}}"></script>
+
+
+    <script>
+
+      $(function() {
+        // Initializes and creates emoji set from sprite sheet
+        window.emojiPicker = new EmojiPicker({
+          emojiable_selector: '[data-emojiable=true]',
+          assetsPath: '../lib/img/',
+          popupButtonClasses: 'fa fa-smile-o'
+        });
+        // Finds all elements with `emojiable_selector` and converts them to rich emoji input fields
+        // You may want to delay this step if you have dynamically created input fields that appear later in the loading process
+        // It can be called as many times as necessary; previously converted input fields will not be converted again
+        window.emojiPicker.discover();
+      });
+        function setTextColor(picker) {
+            document.getElementsByTagName('body')[0].style.color = '#' + picker.toString()
+        }
+    </script>
+
+
+</html>

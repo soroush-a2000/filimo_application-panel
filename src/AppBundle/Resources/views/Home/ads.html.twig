@@ -1,0 +1,102 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% block body%}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="tab-moivie">
+                        <a href="{{path("app_home_settings")}}" class="btn btn-tab-movie col-md-12"><i class="material-icons">settings</i> تنظیمات عمومی </a>
+                        <a href="{{path("app_home_ads")}}" class="btn btn-tab-movie-active col-md-12"><i class="material-icons">monetization_on</i> تنظیمات تبلیغات </a>
+                        <a href="{{path("fos_user_change_password")}}" class="btn btn-tab-movie col-md-12"><i class="material-icons">lock</i> تغییر رمز عبور </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-header card-header-icon" data-background-color="rose">
+                        <i class="material-icons">monetization_on</i>
+                    </div>
+                    <div class="card-content">
+                        <h4 class="card-title">تنظیمات تبلیغات</h4>
+                        {{form_start(form)}}                            
+                        <div class="panel-body">
+                            <label class="panel-title">تپسل</label>
+                            
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label">کلید تپسل (شناسه تبلیغ گاه)</label>
+                                {{form_widget(form.nativeadmobid,{"attr":{"class":"form-control"}})}}
+                            </div>
+                            <span class="validate-input">{{form_errors(form.nativeadmobid)}}</span>
+                        </div>
+                        <div class="panel-body">
+
+                        
+                            <label class="panel-title">تبلیغ جایزه دار</label>
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label">Rewarded AdMob Id</label>
+                                {{form_widget(form.rewardedadmobid,{"attr":{"class":"form-control"}})}}
+                            </div>
+                            <span class="validate-input">{{form_errors(form.rewardedadmobid)}}</span>
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label">شناسه تبلیغ گاه تپسل</label>
+                                {{form_widget(form.nativefacebookid,{"attr":{"class":"form-control"}})}}
+                            </div>
+                            <span class="validate-input">{{form_errors(form.nativefacebookid)}}</span>
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label">وضعیت</label>
+                                {{form_widget(form.nativetype,{"attr":{"class":"form-control"}})}}
+                            </div>
+                            <span class="validate-input">{{form_errors(form.nativetype)}}</span>
+                        </div>
+                        <div class="panel-body">
+                            <label class="panel-title">تبلیغ بنری</label>
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label">Banner AdMob Id</label>
+                                {{form_widget(form.banneradmobid,{"attr":{"class":"form-control"}})}}
+                            </div>
+                            <span class="validate-input">{{form_errors(form.banneradmobid)}}</span>
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label">شناسه تبلیغ گاه تپسل</label>
+                                {{form_widget(form.bannerfacebookid,{"attr":{"class":"form-control"}})}}
+                            </div>
+                            <span class="validate-input">{{form_errors(form.bannerfacebookid)}}</span>
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label">وضعیت</label>
+                                {{form_widget(form.bannertype,{"attr":{"class":"form-control"}})}}
+                            </div>
+                            <span class="validate-input">{{form_errors(form.bannertype)}}</span>
+                        </div>
+                        <div class="panel-body">
+                            <label class="panel-title">تبلیغ تمام صفحه</label>
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label">Interstitial AdMob Id</label>
+                                {{form_widget(form.interstitialadmobid,{"attr":{"class":"form-control"}})}}
+                            </div>
+                            <span class="validate-input">{{form_errors(form.interstitialadmobid)}}</span>
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label">شناسه تبلیغ گاه تپسل</label>
+                                {{form_widget(form.interstitialfacebookid,{"attr":{"class":"form-control"}})}}
+                            </div>
+                            <span class="validate-input">{{form_errors(form.interstitialfacebookid)}}</span>
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label">وضعیت</label>
+                                {{form_widget(form.interstitialtype,{"attr":{"class":"form-control"}})}}
+                            </div>
+                            <span class="validate-input">{{form_errors(form.interstitialtype)}}</span>
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label">تعداد کلیک برای نمایش تبلیغ</label>
+                                {{form_widget(form.interstitialclick,{"attr":{"class":"form-control"}})}}
+                            </div>
+                            <span class="validate-input">{{form_errors(form.interstitialclick)}}</span>
+                        </div>
+                        <span class="pull-right"><a href="{{path("app_category_index")}}" class="btn btn-fill btn-yellow"><i class="material-icons">arrow_forward</i> لغو</a>{{form_widget(form.save,{attr:{"class":"btn btn-fill btn-rose"}})}}</span>
+
+                    </div>
+                    {{form_end(form)}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock%}

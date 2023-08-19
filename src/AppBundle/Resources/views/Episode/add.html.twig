@@ -1,0 +1,120 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="tab-moivie">
+                        <a href="#" class="btn btn-tab-movie-active col-md-12"><i class="material-icons">add</i> اضافه
+                            کردن </a>
+                        <a href="#" class="btn btn-tab-movie col-md-12"><i class="material-icons">folder</i> منابع </a>
+                        <a href="#" class="btn btn-tab-movie col-md-12"><i class="material-icons">subtitles</i> زیرنویس
+                            ها </a>
+                        <a href="#" class="btn btn-tab-movie col-md-12"><i class="material-icons">remove_red_eye</i> 0
+                            مشاهده </a>
+                        <a href="#" class="btn btn-tab-movie col-md-12"><i class="material-icons">cloud_download</i> 0
+                            دانلود </a>
+                        <a href="{{ path("app_serie_seasons",{"id":season.poster.id}) }}"
+                           class="btn btn-tab-movie col-md-12"><i class="material-icons">arrow_forward</i> برگشت </a>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-header card-header-icon" data-background-color="rose">
+                        <i class="material-icons">movie</i>
+                    </div>
+                    <div class="card-content">
+                        <h4 class="card-title"> افزودن یک قسمت جدید برای ( {{ season.title }} ) سریال
+                            : {{ season.poster.title }}  </h4>
+                        <br>
+                        {{ form_start(form) }}
+                        <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                            <div class="fileinput-new thumbnail">
+                                <a href="#" class="btn btn-rose btn-round btn-select-1"><i
+                                            class="material-icons">image</i> انتخاب تصویر </a>
+                                <img id="img-preview-1"
+                                     src="{{ asset("img/image_placeholder.jpg")|imagine_filter('cover_thumb') }}"
+                                     width="100%">
+                            </div>
+                            {{ form_widget(form.file,{"attr":{"class":"file-hidden input-file-1 img-selector-1","style":"    display: none;"}}) }}
+                            <span class="validate-input">{{ form_errors(form.file) }}</span>
+                        </div>
+                        <div class="form-group label-floating is-empty">
+                            <label class="control-label">نام قسمت</label>
+                            <br>
+                            <input type="hidden" id="season_id" value="{{ season.title }}">
+                            <input type="hidden" id="serie_name" value="{{ season.poster.title }}">
+                            <input type="hidden" name="image_url" id="episode_image">
+                            {{ form_widget(form.title,{"attr":{"class":"form-control search-input"}}) }}
+                            <a href="#" id="search_episodes" class="btn btn-sm search-btn"><i class="material-icons"
+                                                                                              style="font-size: 30px;">list</i></a>
+                            <span class="validate-input">{{ form_errors(form.title) }}</span>
+                        </div>
+                        <div id="div1" style="display:none">
+                            <div id="result_search">
+
+                            </div>
+                            <span class="pull-right" style=" margin: 7px; "><a id="close_search" href="#"
+                                                                               class="btn btn-fill btn-yellow"
+                                                                               style="    margin: 0px;"> لغو</a>
+                        </div>
+                        <div class="form-group label-floating is-empty">
+                            <label class="control-label">توضیحات قسمت</label>
+                            {{ form_widget(form.description,{"attr":{"class":"form-control","rows":8}}) }}
+                            <span class="validate-input">{{ form_errors(form.description) }}</span>
+                        </div>
+                        <div class="form-group label-floating is-empty">
+                            <label class="control-label">مدت زمان قسمت</label>
+                            {{ form_widget(form.duration,{"attr":{"class":"form-control"}}) }}
+                            <span class="validate-input">{{ form_errors(form.duration) }}</span>
+                        </div>
+                        <div class="form-group label-floating is-empty">
+                            <label class="control-label">پخش قسمت</label>
+                            {{ form_widget(form.playas,{"attr":{"class":"form-control"}}) }}
+                            <span class="validate-input">{{ form_errors(form.playas) }}</span>
+                        </div>
+                        <div class="form-group label-floating is-empty">
+                            <label class="control-label">دانلود قسمت</label>
+                            {{ form_widget(form.downloadas,{"attr":{"class":"form-control"}}) }}
+                            <span class="validate-input">{{ form_errors(form.downloadas) }}</span>
+                        </div>
+                        <div class="">
+                            <label>
+                                {{ form_widget(form.enabled) }} فعال باشد؟
+                            </label>
+                        </div>
+                        <div class="panel-body">
+                            <label class="panel-title">منبع قسمت</label>
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label">نوع منبع</label>
+                                {{ form_widget(form.sourcetype,{"attr":{"class":"form-control"}}) }}
+                                <span class="validate-input">{{ form_errors(form.sourcetype) }}</span>
+                            </div>
+                            <span class="validate-input">{{ form_errors(form.sourcetype) }}</span>
+                            <div class="form-group label-floating is-empty" {% if form.sourcetype.vars.value == 5 %} style="display:none" {% endif %}>
+                                <label class="control-label">لینک منبع</label>
+                                {{ form_widget(form.sourceurl,{"attr":{"class":"form-control"}}) }}
+                                <span class="validate-input">{{ form_errors(form.sourceurl) }}</span>
+                            </div>
+                            <div class="form-group label-floating is-empty" {% if form.sourcetype.vars.value != 5 %} style="display:none" {% endif %}>
+                                <label class="control-label">فایل منبع</label>
+                                {{ form_widget(form.sourcefile,{"attr":{"class":"form-control"}}) }}
+                                <span class="validate-input">{{ form_errors(form.sourcefile) }}</span>
+                            </div>
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label">کیفیت و توضیحات منبع</label>
+                                {{ form_widget(form.sourcequality,{"attr":{"class":"form-control"}}) }}
+                                <span class="validate-input">{{ form_errors(form.sourcequality) }}</span>
+                            </div>
+                        </div>
+                        <span class="pull-right"><a href="{{ path("app_serie_seasons",{"id":season.poster.id}) }}"
+                                                    class="btn btn-fill btn-yellow"><i class="material-icons">arrow_forward</i> لغو</a>{{ form_widget(form.save,{attr:{"class":"btn btn-fill btn-rose"}}) }}</span>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

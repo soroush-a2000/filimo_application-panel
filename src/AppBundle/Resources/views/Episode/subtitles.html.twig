@@ -1,0 +1,67 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% block body%}
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-3">
+				<div class="card">
+					<div class="tab-moivie">
+						<a href="{{path("app_episode_edit",{"id":episode.id})}}" class="btn btn-tab-movie col-md-12"><i class="material-icons">edit</i> ویرایش </a>
+						<a href="{{path("app_episode_sources",{"id":episode.id})}}" class="btn btn-tab-movie col-md-12"><i class="material-icons">folder</i> منابع </a>
+						<a href="{{path("app_episode_subtitles",{"id":episode.id})}}" class="btn btn-tab-movie-active col-md-12"><i class="material-icons">subtitles</i> زیرنویس ها </a>
+						<a href="#" class="btn btn-tab-movie col-md-12"><i class="material-icons">remove_red_eye</i> {{episode.viewsnumber}} مشاهده </a>
+						<a href="#" class="btn btn-tab-movie col-md-12"><i class="material-icons">cloud_download</i> {{episode.downloadsnumber}} دانلود </a>
+						<a href="{{path("app_serie_seasons",{"id":episode.season.poster.id})}}" class="btn btn-tab-movie col-md-12"><i class="material-icons">arrow_forward</i> برگشت </a>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-9">
+				<div class="card">
+					<div class="card-header card-header-icon" data-background-color="rose">
+						<i class="material-icons">subtitles</i>
+					</div>
+					<a  href="{{path("app_subtitle_add_episode",{"episode":episode.id})}}" class="btn  btn-xs btn-success pull-right new-subtitle-source"><i class="material-icons" style="font-size: 30px;">add_box</i> افزودن زیرنویس جدید </a>
+					<div class="card-content">
+						<h4 class="card-title"> زیرنویس ها : {{episode.title}} </h4>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="card" style="margin: 15px 0;">
+							<div class="table-responsive">
+								<table class="table table-source" width="100%">
+									<thead class="text-primary">
+										<tr>
+											<th><b>زبان</b></th>
+											<th style="text-align:right"><b>گزینه ها</b></th>
+										</tr>
+									</thead>
+									<tbody>
+										{% for subtitle in episode.subtitles %}
+											<tr>
+												<td>
+													<img class="mini-language-img" src="{{asset(subtitle.language.media.link)}}" />{{subtitle.language}}
+												</td>
+												<td>
+													<a target="_blank" href="{{ app.request.scheme ~'://' ~ app.request.httpHost ~ asset(subtitle.media.link) }}" class="btn btn-rose btn-xs pull-right" ><i class="material-icons">cloud_download</i> Download</a>
+													<a href="{{path("app_subtitle_delete",{"id":subtitle.id})}}" class="btn btn-rose btn-xs pull-right"><i class="material-icons">delete</i></a>
+												</td>
+											</tr>
+										{% else %}
+											<tr>
+												<td rowspan="2">
+													<br>
+													<center><img src="{{asset("img/bg_empty.png")}}"  style="width: auto !important;"></center>
+													<br>
+												</td>
+											</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock%}

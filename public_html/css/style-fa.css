@@ -1,0 +1,86 @@
+@font-face {
+	font-family: IRANSans;
+	font-style: normal;
+	font-weight: bold;
+	src: url('../font/eot/IRANSansWeb_Bold.eot');
+	src: url('../font/eot/IRANSansWeb_Bold.eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
+		 url('../font/woff2/IRANSansWeb_Bold.woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
+		 url('../font/woff/IRANSansWeb_Bold.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+		 url('../font/ttf/IRANSansWeb_Bold.ttf') format('truetype');
+}
+@font-face {
+	font-family: IRANSans;
+	font-style: normal;
+	font-weight: 500;
+	src: url('../font/eot/IRANSansWeb_Medium.eot');
+	src: url('../font/eot/IRANSansWeb_Medium.eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
+		 url('../font/woff2/IRANSansWeb_Medium.woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
+		 url('../font/woff/IRANSansWeb_Medium.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+		 url('../font/ttf/IRANSansWeb_Medium.ttf') format('truetype');
+}
+@font-face {
+	font-family: IRANSans;
+	font-style: normal;
+	font-weight: 300;
+	src: url('../font/eot/IRANSansWeb_Light.eot');
+	src: url('../font/eot/IRANSansWeb_Light.eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
+		 url('../font/woff2/IRANSansWeb_Light.woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
+		 url('../font/woff/IRANSansWeb_Light.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+		 url('../font/ttf/IRANSansWeb_Light.ttf') format('truetype');
+}
+@font-face {
+	font-family: IRANSans;
+	font-style: normal;
+	font-weight: 200;
+	src: url('../font/eot/IRANSansWeb_UltraLight.eot');
+	src: url('../font/eot/IRANSansWeb_UltraLight.eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
+		 url('../font/woff2/IRANSansWeb_UltraLight.woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
+		 url('../font/woff/IRANSansWeb_UltraLight.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+		 url('../font/ttf/IRANSansWeb_UltraLight.ttf') format('truetype');
+}
+@font-face {
+	font-family: IRANSans;
+	font-style: normal;
+	font-weight: normal;
+	src: url('../font/eot/IRANSansWeb.eot');
+	src: url('../font/eot/IRANSansWeb.eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
+		 url('../font/woff2/IRANSansWeb.woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
+		 url('../font/woff/IRANSansWeb.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+		 url('../font/ttf/IRANSansWeb.ttf') format('truetype');
+}
+
+
+* {
+  font-family: IRANSans;
+  direction: rtl;
+}
+
+body{
+  font-family: IRANSans;
+  direction: rtl;
+}
+
+a,p,span,h1,h2,h3,h4,h5,h6{
+  font-weight: normal !important;
+  font-family: IRANSans !important;
+}
+
+md-list-item .md-list-item-inner>.md-list-item-inner>p, md-list-item .md-list-item-inner>p, md-list-item>.md-list-item-inner>p, md-list-item>p{
+  text-align: right;
+}
+
+.table > tbody > tr > td {
+  text-align: right;
+}
+
+.table > caption + thead > tr:first-child > th, .table > colgroup + thead > tr:first-child > th, .table > thead:first-child > tr:first-child > th, .table > caption + thead > tr:first-child > td, .table > colgroup + thead > tr:first-child > td, .table > thead:first-child > tr:first-child > td {
+  text-align: right;
+}
+md-checkbox .md-container {
+ direction: rtl !important;
+ right: 0 !important;
+}
+.md-label span {
+ margin-left: 0 !important;
+ margin-right: 25px !important;
+}

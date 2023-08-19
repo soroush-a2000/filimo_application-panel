@@ -1,0 +1,86 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% block body%}
+    <div class="container-fluid">
+        <div class="row">
+                        {% if user.media != null %}
+                {% if user.media.type =="link" %}
+                    {% set image = user.media.url%}
+                {% else %}
+                    {% set image = asset(user.media.link)|imagine_filter('actor_thumb') %}
+                {% endif %}
+            {% else %}
+                {% set image = asset("img/avatar.jpg")|imagine_filter('actor_thumb') %}
+            {% endif %}
+            <div class="col-md-12" style=" height: auto; text-align:center;background-image:url({{image}});background-position: center;background-size: 100%;text-align: center;">
+                {% if user.media != null %}
+                    {% if user.media.type =="link" %}
+                        <img  style="border-radius:300px;margin:10px;height:100px;width:100px;border: 5px solid rgb(255, 247, 247);" src="{{user.media.url}}"  >
+                    {% else %}
+                        <img  style="border-radius:300px;margin:10px;height:100px;width:100px;border: 5px solid rgb(255, 247, 247);" src="{{asset(user.media.link)|imagine_filter('actor_thumb')}}"  >
+                    {% endif %}
+                {% else %}
+                    <img class="avatar-char palette-Red-400 bg"  style="border-radius: 100px;    border: 0.5px solid #ccc;" src="{{asset("img/avatar.jpg")|imagine_filter('actor_thumb')}}"  >
+                {% endif %}
+                <h3 style=" color: white; font-weight: bold">{{user.name}}</h3>
+            </div>
+            <div  class="col-md-12" style="border:1px solid #ccc;height:70px;background:white">
+                <div class="row">
+                    <div  class="col-md-4" style="border-right:1px solid #ccc;height:70px;background:white">
+                        <a href="{{path("user_user_edit",{"id":user.id})}}" style="color:black;font-size:20px;line-height: 70px;font-weight: bold;"> ویرایش اطلاعات </a>
+                    </div>
+                    <div  class="col-md-4" style="border-right:1px solid #ccc;height:70px;background:white">
+                        <a href="{{path("user_user_comments",{"id":user.id})}}" style="color:black;font-size:20px;line-height: 70px;font-weight: bold;"> نظرات </a>
+                    </div>
+                    <div  class="col-md-4" style="border-right:1px solid #ccc;height:70px;background:white">
+                        <a href="{{path("user_user_ratings",{"id":user.id})}}" style="color:black;font-size:20px;line-height: 70px;font-weight: bold;"> امتیازات </a>
+                    </div>
+                </div>
+                
+            </div>
+            <div  class="col-md-12" style="height:20px;">
+                
+            </div>
+            <div class="col-sm-offset-2  col-md-8">
+                <div class="card">
+                    <div class="card-header card-header-icon" data-background-color="rose">
+                        <i class="material-icons">group</i>
+                    </div>
+                    <div class="card-content">
+                        <h4 class="card-title">ویرایش :  {{form.vars.value.name}}</h4>
+                        <br>
+                        <div class="card-body card-padding">
+                            {{ form_start(form,{attr:{"class":"form-horizontal"}}) }}
+                            <div class="form-group fg-line">
+                                {{form_label(form.name,null,{label_attr:{"class":""}})}}
+                                {{form_widget(form.name,{attr:{"class":"form-control"}})}}
+                                {{form_errors(form.name)}}
+                            </div>
+                            <div class="form-group fg-line">
+                                {{form_label(form.email,null,{label_attr:{"class":""}})}}
+                                {{form_widget(form.email,{attr:{"class":"form-control"}})}}
+                                {{form_errors(form.email)}}
+                            </div>
+                            <div class="form-group fg-line">
+                                {{form_label(form.remainindays,null,{label_attr:{"class":""}})}}
+                                {{form_widget(form.remainindays,{attr:{"class":"form-control"}})}}
+                                {{form_errors(form.remainindays)}}
+                            </div>
+                            <br>
+                            <div >
+                                <label>
+                                    {{form_widget(form.enabled)}}
+                                    فعال / غیر فعال کردن
+                                </label>
+                            </div>
+                            <br>
+                            {{form_widget(form.save,{attr:{"class":"btn btn-success btn-lg waves-effect pull-right"}})}}
+                            {{ form_end(form) }}
+                            <br>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock%}

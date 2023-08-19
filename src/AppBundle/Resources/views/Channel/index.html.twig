@@ -1,0 +1,137 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% block body%}
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="row">
+					<div class="col-md-2">
+						<button onclick="document.getElementById('id03').style.display='block'"
+								class="w3-button w3-black btn  btn-lg btn-warning col-md-12"><i class="material-icons"
+																								style="font-size: 30px;">menu</i>
+							گزینه ها
+						</button>
+					</div>
+					<div class="col-md-3">
+						<a href="{{path("app_channel_index")}}" class="btn  btn-lg btn-warning col-md-12"><i class="material-icons" style="font-size: 30px;">refresh</i> بروزرسانی </a>
+					</div>
+					<div class="col-md-3">
+						<a class="btn btn btn-lg btn-yellow col-md-12"><i class="material-icons" style="font-size: 30px;">live_tv</i> {{channels_count}} کانال </a>
+					</div>
+					<div class="col-md-4">
+						<a href="{{path("app_channel_add")}}" class="btn btn-rose btn-lg pull-right add-button col-md-12" title=""><i class="material-icons" style="font-size: 30px;">add_box</i> افزودن کانال جدید </a>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<input id="route_channel_menu" value="{{ path("app_channel_menu") }}" type="hidden">
+						<form>
+							<input name="q" value="{{app.request.query.get("q")}}" type="text" class="search-input">
+							<button class="btn btn-sm search-btn"><i class="material-icons" style="font-size: 30px;">search</i></button>
+						</form>
+					</div>
+				</div>
+				<div class="card">
+					<div class="card-content">
+						<h4 class="card-title">کانال ها</h4>
+						<br>
+						<div class="table-responsive">
+							<table class="table" width="100%">
+								<thead class="text-primary">
+								<tr>
+									<th>
+										<label style="padding: inherit" class="containerposter">
+											<input type="checkbox" id="checkallchannel">
+											<span class="checkmark"></span>
+										</label></th>
+									<th width="150px">تصویر</th>
+									<th width="400px">عنوان</th>
+									<th><i class="material-icons" style="color: #21d60a; font-size: 20px;vertical-align: middle">play_circle_filled</i> نوع پخش
+									</th>
+									<th>نظرات</th>
+									<th>وضعیت</th>
+									<th>عملیات</th>
+								</tr>
+								</thead>
+								<tbody>
+								{% for channel in channels %}
+									<tr>
+										<td>
+											<label style="padding: inherit" class="containerposter">
+												<input type="checkbox" id="wq" name="channel_ids[]" value="{{ channel.id }}">
+												<span class="checkmark"></span>
+											</label>
+										</td>
+										<td>
+											<img style="margin: 5px 0;border-radius: 3px" class="avatar-char card"
+												 src="{{ asset(channel.media.link)|imagine_filter('channel_thumb') }}">
+										</td>
+
+										<td>{{ channel.title }}</td>
+										<td>
+											{% if channel.playas == "1" %}
+												<span class="label label-default">رایگان</span>
+											{% elseif channel.playas == "2" %}
+												<span class="label label-primary">ویژه</span>
+											{% elseif channel.playas == "3" %}
+												<span class="label label-info">با نمایش تبلیغ</span>
+											{% endif %}
+										</td>
+										<td>
+											{% if channel.comment == true %}
+												<span class="label label-success">فعال</span>
+											{% else %}
+												<span class="label label-rose">غیر فعال</span>
+											{% endif %}
+										</td>
+
+										<td>
+											{% if channel.enabled==true %}
+												<span class="label label-success">فعال</span>
+											{% else %}
+												<span class="label label-danger">غیر فعال</span>
+											{% endif %}
+										</td>
+										<td>
+											<a href="{{ path("app_channel_edit",{"id":channel.id}) }}" rel="tooltip"
+											   data-placement="left"
+											   class=" btn btn-primary btn-xs btn-round" data-original-title="Edit">
+												<i class="material-icons">edit</i>
+											</a>
+												<a href="{{path("app_home_notif_channel",{title:channel.title,id:channel.id,image:asset(channel.media.link)|imagine_filter("channel_thumb"),icon:asset(channel.media.link)|imagine_filter("channel_thumb")})}}"
+												   rel="tooltip" data-placement="left"
+												   class=" btn btn-primary btn-xs btn-round"
+												   data-original-title="Noitifcation">
+													<i class="material-icons">notifications</i>
+												</a>
+											<a href="{{ path("app_channel_delete",{"id":channel.id}) }}" rel="tooltip"
+											   data-placement="left"
+											   class=" btn btn-danger btn-xs btn-round" data-original-title="Delete">
+												<i class="material-icons">delete</i>
+											</a>
+										</td>
+									</tr>
+								{% else %}
+									<tr>
+										<td colspan="4">
+											<br>
+											<br>
+											<center><img src="{{ asset("img/bg_empty.png") }}"
+														 style="width: auto !important;"></center>
+											<br>
+											<br>
+										</td>
+									</tr>
+								{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class=" pull-right">
+					{{ knp_pagination_render(channels) }}
+				</div>
+
+			</div>
+		</div>
+		
+	{% endblock%}

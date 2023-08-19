@@ -1,0 +1,131 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% block body%}
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="row">
+					<div class="col-md-4">
+						{% if app.request.query.get("status") == "disable" %}
+							<a href="#" class="btn  btn-lg btn-rose col-md-12"><i class="material-icons" style="font-size: 30px">comments</i>  نظرات در انتظار تایید :  {{comments_disable|length}} <i class="material-icons" style="font-size: 40px;">navigate_next</i></a>
+						{% else %}
+							<a href="{{path("app_comment_index")}}?status=disable" class="btn  btn-lg btn-yellow col-md-12"><i class="material-icons" style="font-size: 30px;">comments</i>  نظرات در انتظار تایید : {{comments_disable|length}}</a>
+						{% endif %}
+
+					</div>
+					<div class="col-md-4">
+						{% if app.request.query.get("status") == "" %}
+							<a href="#" class="btn  btn-lg btn-rose col-md-12"><i class="material-icons" style="font-size: 30px;">comments</i> همه نظرات : {{comments_all|length}} <i class="material-icons" style="font-size: 40px;">navigate_next</i></a>
+						{% else %}
+							<a href="{{path("app_comment_index")}}" class="btn  btn-lg btn-yellow col-md-12"><i class="material-icons" style="font-size: 30px;">comments</i> همه نظرات : {{comments_all|length}}</a>
+						{% endif %}
+					</div>
+					<div class="col-md-4">
+						{% if app.request.query.get("status") == "enable" %}
+							<a href="#" class="btn  btn-lg btn-rose col-md-12"><i class="material-icons" style="font-size: 30px;">comments</i> نظرات فعال : {{comments_enable|length}} <i class="material-icons" style="font-size: 40px;">navigate_next</i></a>
+						{% else %}
+							<a href="{{path("app_comment_index")}}?status=enable" class="btn  btn-lg btn-yellow col-md-12"><i class="material-icons" style="font-size: 30px;">comments</i> نظرات فعال : {{comments_enable|length}}</a>
+						{% endif %}
+					</div>
+				</div>
+				<br>
+				<div class="row">
+					{% for comment in pagination %}
+						<div class="col-md-6">
+							<ul class="timeline timeline-simple">
+								<li class="timeline-inverted">
+									<div class="timeline-badge info">
+										{% if comment.user.media != null %}
+											{% if comment.user.media.type =="link" %}
+												<img class="avatar-char palette-Red-400 bg"  style="border-radius: 100px;    border: 0.5px solid #ccc;" src="{{comment.user.media.url}}" alt="">
+											{% else %}
+												<img class="avatar-char palette-Red-400 bg"  style="border-radius: 100px;    border: 0.5px solid #ccc;" src="{{asset(comment.user.media.link)|imagine_filter('actor_thumb')}}" alt="">
+											{% endif %}
+										{% else %}
+											<img class="avatar-char palette-Red-400 bg"  style="border-radius: 100px;    border: 0.5px solid #ccc;" src="{{asset("img/avatar.jpg")|imagine_filter('actor_thumb')}}" alt="">
+										{% endif %}
+									</div>
+									<div class="timeline-panel">
+										<div class="timeline-heading">
+											<a href="{{path("user_user_edit",{id:comment.user.id})}}" title="">
+												<span class="label label-danger">{{comment.user.name}}</span>
+											</a>
+											<span class="pull-right" >
+												{% if app.request.query.get("status") == "disable" %}
+													<a href="{{path("app_comment_delete",{id:comment.id,"status":"disable","comment":"true"})}}"  rel="tooltip" data-placement="bottom" title="" data-original-title="Delete">
+													<i class="material-icons" style="color:red">delete</i>
+												</a>
+												{% elseif app.request.query.get("status") == "enable" %}
+													<a href="{{path("app_comment_delete",{id:comment.id,"status":"enable","comment":"true"})}}"  rel="tooltip" data-placement="bottom" title="" data-original-title="Delete">
+													<i class="material-icons" style="color:red">delete</i>
+												</a>
+												{% else %}
+													<a href="{{path("app_comment_delete",{id:comment.id,"comment":"true"})}}"  rel="tooltip" data-placement="bottom" title="" data-original-title="Delete">
+													<i class="material-icons" style="color:red">delete</i>
+													{% endif %}
+
+												{% if comment.enabled %}
+													<a href="{{path("app_comment_hide",{id:comment.id})}}"  rel="tooltip" data-placement="bottom" title="" data-original-title="Hide">
+														<i class="material-icons" style="color:green">visibility_off</i>
+													</a>
+												{% else %}
+													<a href="{{path("app_comment_hide",{id:comment.id})}}"  rel="tooltip" data-placement="bottom" title="" data-original-title="Show">
+														<i class="material-icons" style="color:red">remove_red_eye</i>
+													</a>
+												{% endif %}
+											</span>
+										</div>
+										<div class="timeline-body">
+											<p>{{comment.contentclear}}</p>
+										</div>
+										<hr>
+										{% if comment.channel != null  %}
+											<a href="{{path("app_channel_comments",{id:comment.channel.id})}}" title="">
+												<small class="label label-rose">
+												<span>{{comment.channel}}</span>
+												</small>
+											</a>
+										{% elseif comment.poster != null  %}
+											{% if comment.poster.type == "serie" %}
+											<a href="{{path("app_serie_comments",{id:comment.poster.id})}}" title="">
+												<small class="label label-rose">
+												<span>{{comment.poster}}</span>
+												</small>
+											</a>
+											{% elseif comment.poster.type == "movie"   %}
+											<a href="{{path("app_movie_comments",{id:comment.poster.id})}}" title="">
+												<small class="label label-rose">
+												<span>{{comment.poster}}</span>
+												</small>
+											</a>
+
+											{% endif %}
+										{% endif %}
+										
+										<small class="pull-right label label-rose">
+										<span>{{comment.created|ago}}</span>
+										</small>
+									</div>
+								</li>
+								
+							</ul>
+						</div>
+					{% else %}
+						<div class="card">
+							<div class="card-content">
+								<br>
+								<br>
+								<center><img src="{{asset("img/bg_empty.png")}}"  style="width: auto !important;"></center>
+								<br>
+								<br>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+				<div class=" pull-right">
+					{{ knp_pagination_render(pagination) }}
+				</div>
+			</div>
+		</div>
+	</div>
+	
+{% endblock%}

@@ -1,0 +1,184 @@
+imports:
+  - { resource: parameters.yml }
+  - { resource: security.yml }
+  - { resource: services.yml }
+  - { resource: "@AppBundle/Resources/config/services.yml" }
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+  locale: fa
+  files_directory: '%kernel.root_dir%/../public_html/uploads/'
+  files_directory_mp3: '%kernel.root_dir%/../public_html/files/'
+  files_directory_read: '/uploads/'
+  files_directory_read_mp3: '/files/'
+
+  token_app: "4F5A9C3D9A86FA54EACEDDD635185"
+
+  # Select Type for send sms verify
+  sms_service_type: "1"  #( 1 = Faraz SMS   ,   2 = Kave Negar)
+
+  #Faraz SMS configuration for send verify code
+  sms_server: "http://188.0.240.110/"
+  sms_user_name: ""
+  sms_password: ""
+  sms_pcode: ""
+  sms_reset_pcode: ""  # patern code for reset password login
+  sms_line: "+98500010707"
+
+  #Kave Negar configuration for send verify code
+  kn_sms_server: "https://api.kavenegar.com/v1/"
+  kn_sms_api_key: ""
+  kn_sms_pcode: ""
+  kn_sms_reset_pcode: ""   # patern code for reset password login
+
+
+framework:
+  session:
+    gc_probability: 0
+  translator: { fallbacks: [en] }
+  secret:          "%secret%"
+  router:
+    resource: "%kernel.root_dir%/config/routing.yml"
+    strict_requirements: ~
+  form:            ~
+  csrf_protection: ~
+  validation:      { enable_annotations: true }
+  #serializer:      { enable_annotations: true }
+  templating:
+    engines: ['twig','php']
+  default_locale:  "%locale%"
+  trusted_hosts:   ~
+  trusted_proxies: ~
+  session:
+    # handler_id set to null will use default session handler from php.ini
+    handler_id:  ~
+  fragments:       ~
+  http_method_override: true
+
+# Twig Configuration
+twig:
+  debug:            "%kernel.debug%"
+  strict_variables: "%kernel.debug%"
+
+# Doctrine Configuration
+doctrine:
+  dbal:
+    driver:   pdo_mysql
+    host:     "%database_host%"
+    port:     "%database_port%"
+    dbname:   "%database_name%"
+    user:     "%database_user%"
+    password: "%database_password%"
+    charset:  UTF8
+    # if using pdo_sqlite as your database driver:
+    #   1. add the path in parameters.yml
+    #     e.g. database_path: "%kernel.root_dir%/data/data.db3"
+    #   2. Uncomment database_path in parameters.yml.dist
+    #   3. Uncomment next line:
+    #     path:     "%database_path%"
+
+  orm:
+    auto_generate_proxy_classes: "%kernel.debug%"
+    naming_strategy: doctrine.orm.naming_strategy.underscore
+    auto_mapping: true
+    dql:
+      string_functions:
+        SHA1: AppBundle\DQL\Sha1
+      numeric_functions:
+        Rand: AppBundle\DQL\Rand
+fos_user:
+  db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+  firewall_name: main
+  user_class: UserBundle\Entity\User
+# Swiftmailer Configuration
+swiftmailer:
+  transport: "%mailer_transport%"
+  host:      "%mailer_host%"
+  username:  "%mailer_user%"
+  password:  "%mailer_password%"
+  spool:     { type: memory }
+ivory_ck_editor:
+  configs:
+    user_config:
+      language: 'fa'
+      width:  '100%'
+      height: '400px'
+      filebrowserBrowseRoute:           "media_index"
+      filebrowserBrowseRouteAbsolute:   true
+      toolbar: [['Undo','Redo'],[ 'Cut','Copy','Paste'],["Bold","Italic","Underline","TextColor"],['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],['NumberedList', 'BulletedList',"Checkbox"],["BidiLtr","BidiRtl"]]
+      uiColor: "#ffffff"
+      removePlugins: 'elementspath'
+    step_config:
+      language: 'fa'
+      width:  '100%'
+      height: '200px'
+      filebrowserBrowseRoute:           "media_index"
+      filebrowserBrowseRouteAbsolute:   true
+      toolbar: [['Undo','Redo'],[ 'Cut','Copy','Paste'],["Bold","Italic","Underline","TextColor"],['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],['NumberedList', 'BulletedList',"Checkbox"],["BidiLtr","BidiRtl"]]
+      uiColor: "#ffffff"
+      removePlugins: 'elementspath'
+liip_imagine:
+  resolvers:
+    default:
+      web_path:
+        web_root:  %kernel.root_dir%/../public_html/
+        cache_prefix:  uploads/cache
+  loaders:
+    default:
+      filesystem:
+        data_root:  %kernel.root_dir%/../public_html/
+  filter_sets:
+    cache: ~
+    channel_thumb:
+      quality: 100
+      filters:
+        thumbnail: { size: [600, 300], mode: outbound }
+    actor_thumb:
+      quality: 100
+      filters:
+        thumbnail: { size: [500, 500], mode: outbound }
+    poster_thumb:
+      quality: 100
+      filters:
+        thumbnail: { size: [480, 720], mode: outbound }
+    cover_thumb:
+      quality: 100
+      filters:
+        thumbnail: { size: [720,480], mode: outbound }
+    category_thumb:
+      quality: 100
+      filters:
+        thumbnail: { size: [500, 500], mode: outbound }
+    country_thumb:
+      quality: 100
+      filters:
+        thumbnail: { size: [500, 300], mode: outbound }
+    episode_thumb:
+      quality: 100
+      filters:
+        thumbnail: { size: [480,360], mode: outbound }
+    status_thumb:
+      quality: 100
+      filters:
+        thumbnail: { size: [500, 500], mode: outbound }
+    status_thumb_api:
+      quality: 100
+      filters:
+        thumbnail: { size: [400, 300], mode: outbound }
+    slide_thumb:
+      quality: 100
+      filters:
+        thumbnail: { size: [500, 650], mode: outbound }
+    category_thumb_api:
+      quality: 100
+      filters:
+        thumbnail: { size: [500, 500], mode: outbound }
+    language_thumb:
+      quality: 100
+      filters:
+        thumbnail: { size: [200, 200], mode: outbound }
+    language_thumb_api:
+      quality: 100
+      filters:
+        thumbnail: { size: [100, 100], mode: outbound }
