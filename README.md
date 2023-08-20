@@ -9,3 +9,8 @@
 
 # کپی رایت
 این سورس کد توسط وبسایت اندروید ریور فارسی و راستچین شده و من فقط روی آپدیت ها و بهینه سازی های اون کار کردم
+
+
+# تصاویر محیط پنل
+![alt text](https://s6.uupload.ir/files/screenshot-579_pdl.png)
+![alt text](https://s6.uupload.ir/files/screenshot-580_au9.png)
